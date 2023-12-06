@@ -13,7 +13,12 @@ export class AuthService {
   }
 
   register(email: string, password: string): Promise<any> {
-    return this.afAuth.createUserWithEmailAndPassword(email, password);
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
+        console.error('Error during registration:', error);
+        throw error;
+      });
   }
 
   login(email: string, password: string): Promise<any> {

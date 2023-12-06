@@ -15,7 +15,11 @@ export class RegisterComponent {
   register() {
     this.authService
       .register(this.email, this.password)
-      .then((response) => {})
-      .catch((error) => {});
+      .then((response) => {
+        console.log('Registration successful!', response);
+      })
+      .catch((error) => {
+        console.error('Registration failed:', error);
+      });
   }
 }
