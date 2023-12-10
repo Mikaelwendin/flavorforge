@@ -10,4 +10,7 @@
     <button type="submit">Login</button>
   </form>
 </div>
-<div *ngIf="user">Logged in. lol.</div>
+
+<div *ngIf="user">
+  <button (click)="logOut()">Logout</button>
+</div>

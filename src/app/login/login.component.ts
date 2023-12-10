@@ -34,4 +34,7 @@ export class LoginComponent implements OnDestroy {
       UserActions.login({ email: this.email, password: this.password })
     );
   }
+  logOut() {
+    this.store.dispatch(UserActions.logout());
+  }
 }
