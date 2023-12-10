@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import * as UserActions from '../user/user.actions';
 import { User } from '../user/user.model';
 import { selectUser } from '../user/user.selectors';
@@ -15,13 +17,20 @@ export class LoginComponent implements OnDestroy {
   password: string = '';
   user: User | null = null;
   userSubscription: Subscription;
+  isLoggedIn: boolean = false;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.userSubscription = this.store.select(selectUser).subscribe((user) => {
       this.user = user;
-      if (this.user) {
-        console.log('Login successful:', this.user);
-      }
+    });
+
+    this.authService.isAuthenticated$.subscribe((loggedIn) => {
+      console.log('Is logged in:', loggedIn);
+      this.isLoggedIn = loggedIn;
     });
   }
 
@@ -34,7 +43,13 @@ export class LoginComponent implements OnDestroy {
       UserActions.login({ email: this.email, password: this.password })
     );
   }
-  logOut() {
-    this.store.dispatch(UserActions.logout());
+
+  async logOut() {
+    await this.authService.logout();
+    this.navigateToLandingPage();
+  }
+
+  private navigateToLandingPage() {
+    this.router.navigate(['/landing']);
   }
 }
