@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Meal, MealResponse } from '../recipe/recipe.model';
+import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
 
 @Component({
