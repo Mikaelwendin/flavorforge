@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MealResponse } from '../recipe/recipe.model';
 
 @Injectable({
@@ -20,8 +20,11 @@ export class RecipeService {
   getRecipeById(id: string): Observable<any> {
     const url = `${this.apiBaseUrl}/lookup.php`;
     const params = new HttpParams().set('i', id);
-    return this.http.get(url, { params });
+    return this.http
+      .get(url, { params })
+      .pipe(tap((response) => console.log('API Response:', response)));
   }
+
   getCategories(): Observable<any> {
     const url = `${this.apiBaseUrl}/list.php?c=list`;
     return this.http.get(url);
