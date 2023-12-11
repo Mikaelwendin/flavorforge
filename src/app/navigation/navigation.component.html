@@ -1,0 +1,10 @@
+<div>
+  <ul>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/register">Register</a></li>
+    <li>About</li>
+    <li>My page</li>
+  </ul>
+  <h3 *ngIf="isLoggedIn">{{ "Logged in" }}</h3>
+</div>

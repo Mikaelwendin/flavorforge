@@ -9,12 +9,13 @@ import { AuthService } from '../services/auth.service';
 export class RegisterComponent {
   email: string = '';
   password: string = '';
+  username: string = '';
 
   constructor(private authService: AuthService) {}
 
   register() {
     this.authService
-      .register(this.email, this.password)
+      .register(this.email, this.password, this.username)
       .then((response) => {
         console.log('Registration successful!', response);
       })

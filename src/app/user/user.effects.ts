@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserCredential } from 'firebase/auth';
 import { from, of } from 'rxjs';
@@ -15,12 +16,25 @@ export class UserEffects {
       ofType(UserActions.login),
       switchMap((action) =>
         from(this.authService.login(action.email, action.password)).pipe(
-          map((userCredential: UserCredential) => {
+          switchMap((userCredential: UserCredential) => {
+            return this.firestore
+              .collection('users')
+              .doc(userCredential.user?.uid || '')
+              .get();
+          }),
+          map((userDoc) => {
+            interface UserData {
+              email: string;
+              username: string;
+              items: [];
+            }
+            const userData: UserData = userDoc.data() as UserData;
+
             const user: User = {
-              uid: userCredential.user?.uid || '',
-              email: userCredential.user?.email || '',
-              username: '',
-              items: [],
+              uid: userDoc.id,
+              email: userData.email || '',
+              username: userData.username || '',
+              items: userData.items || [],
             };
             return UserActions.loginSuccess({ user });
           }),
@@ -32,6 +46,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore
   ) {}
 }
