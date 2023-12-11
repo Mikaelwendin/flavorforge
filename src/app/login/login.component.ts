@@ -12,7 +12,7 @@ import { selectUser } from '../user/user.selectors';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
   email: string = '';
   password: string = '';
   user: User | null = null;
@@ -34,10 +34,6 @@ export class LoginComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
-  }
-
   login() {
     this.store.dispatch(
       UserActions.login({ email: this.email, password: this.password })
@@ -46,6 +42,7 @@ export class LoginComponent implements OnDestroy {
 
   async logOut() {
     await this.authService.logout();
+    this.userSubscription.unsubscribe();
     this.navigateToLandingPage();
   }
 

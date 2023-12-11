@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,22 +12,41 @@ export class AuthService {
   isAuthenticated$: Observable<boolean> =
     this.isAuthenticatedSubject.asObservable();
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {
     this.afAuth.authState
       .pipe(
         tap((user) => {
           const isAuthenticated = !!user;
-          console.log('Is authenticated:', isAuthenticated);
           this.isAuthenticatedSubject.next(isAuthenticated);
-        }),
-        distinctUntilChanged()
+        })
       )
       .subscribe();
   }
 
-  register(email: string, password: string): Promise<any> {
+  register(email: string, password: string, username: string): Promise<any> {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
+      .then((credential) => {
+        const uid = credential.user?.uid;
+        console.log('Updating profile with username:', username);
+        return credential.user
+          ?.updateProfile({ displayName: username })
+          .then(() => {
+            console.log('Profile updated successfully');
+            return this.firestore.collection('users').doc(uid).set({
+              uid: uid,
+              email: email,
+              username: username,
+              items: [],
+            });
+          })
+          .then(() => {
+            return credential;
+          });
+      })
       .catch((error) => {
         console.error('Error during registration:', error);
         throw error;
