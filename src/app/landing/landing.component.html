@@ -14,7 +14,7 @@
     <h2>Search Results:</h2>
     <div>
       <div
-        *ngFor="let recipe of searchResults"
+        *ngFor="let recipe of paginatedResults"
         [routerLink]="['/recipe', recipe.idMeal]"
       >
         <div>
@@ -22,6 +22,11 @@
           <p>{{ recipe.strMeal }}</p>
         </div>
       </div>
+    </div>
+    <div *ngIf="searchResults.length > itemsPerPage">
+      <button *ngFor="let page of getPageArray()" (click)="onPageChange(page)">
+        {{ page }}
+      </button>
     </div>
   </div>
 </div>

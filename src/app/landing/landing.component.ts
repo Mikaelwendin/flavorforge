@@ -11,6 +11,8 @@ import { RecipeService } from '../services/recipe.service';
 export class LandingComponent {
   searchQuery: string = '';
   searchResults: Meal[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 6;
 
   constructor(private recipeService: RecipeService) {}
 
@@ -29,5 +31,18 @@ export class LandingComponent {
           }
         );
     }
+  }
+  get paginatedResults(): Meal[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.searchResults.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+  }
+  getPageArray(): number[] {
+    const pageCount = Math.ceil(this.searchResults.length / this.itemsPerPage);
+    return Array.from({ length: pageCount }, (_, index) => index + 1);
   }
 }
