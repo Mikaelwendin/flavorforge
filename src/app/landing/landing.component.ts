@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
@@ -24,6 +25,11 @@ export class LandingComponent implements OnInit {
     this.searchService.searchResults$.subscribe((results) => {
       this.searchResults = results;
     });
+  }
+
+  clearSearchResults() {
+    this.searchResults = [];
+    this.searchService.setSearchResults(this.searchResults);
   }
 
   searchRecipes() {

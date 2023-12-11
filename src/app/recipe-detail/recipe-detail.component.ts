@@ -35,6 +35,6 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
   goBack(): void {
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/']);
   }
 }
