@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
@@ -11,10 +12,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { RegisterComponent } from './register/register.component';
 import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
-import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     EffectsModule.forRoot([]),
     StoreModule.forRoot({ user: userReducer }),
     EffectsModule.forRoot([UserEffects]),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
