@@ -13,7 +13,10 @@
   <div *ngIf="searchResults.length > 0">
     <h2>Search Results:</h2>
     <div>
-      <div *ngFor="let recipe of searchResults">
+      <div
+        *ngFor="let recipe of searchResults"
+        [routerLink]="['/recipe', recipe.idMeal]"
+      >
         <div>
           <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
           <p>{{ recipe.strMeal }}</p>
