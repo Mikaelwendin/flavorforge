@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit {
   searchQuery: string = '';
   searchResults: Meal[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 6;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private searchService: SearchService
+  ) {}
+
+  ngOnInit(): void {
+    this.searchService.searchResults$.subscribe((results) => {
+      this.searchResults = results;
+    });
+  }
 
   searchRecipes() {
     if (this.searchQuery.trim() !== '') {
@@ -25,6 +35,7 @@ export class LandingComponent {
           (response) => {
             console.log(response);
             this.searchResults = response.meals;
+            this.searchService.setSearchResults(this.searchResults);
           },
           (error) => {
             console.error('Error when searching:', error);

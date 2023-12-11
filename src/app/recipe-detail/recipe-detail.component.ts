@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
 
@@ -14,7 +14,8 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +33,8 @@ export class RecipeDetailComponent implements OnInit {
         }
       );
     });
+  }
+  goBack(): void {
+    this.router.navigate(['/landing']);
   }
 }
