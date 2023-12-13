@@ -1,0 +1,11 @@
+<div>
+  <button (click)="goBack()">Back to Search Results</button>
+  {{ meal?.idMeal }}
+  {{ meal?.strMeal }}
+</div>
+
+<div>
+  <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
+  <p>{{ meal?.strMeal }}</p>
+  <p>{{ meal?.strInstructions }}</p>
+</div>
