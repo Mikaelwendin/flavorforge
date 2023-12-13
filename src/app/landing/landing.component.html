@@ -8,8 +8,26 @@
       name="search"
     />
     <button type="submit">Search</button>
+    <button (click)="getRandomRecipe()" type="button">Random recipe!</button>
   </form>
   <button (click)="clearSearchResults()">Clear Search</button>
+  <div>
+    <h2>Search by Category:</h2>
+    <button (click)="getMealsByCategory('Beef')">Beef</button>
+    <button (click)="getMealsByCategory('Chicken')">Chicken</button>
+    <button (click)="getMealsByCategory('Dessert')">Dessert</button>
+    <button (click)="getMealsByCategory('Lamb')">Lamb</button>
+    <button (click)="getMealsByCategory('Miscellaneous')">Miscellaneous</button>
+    <button (click)="getMealsByCategory('Pasta')">Pasta</button>
+    <button (click)="getMealsByCategory('Pork')">Pork</button>
+    <button (click)="getMealsByCategory('Seafood')">Seafood</button>
+    <button (click)="getMealsByCategory('Side')">Side</button>
+    <button (click)="getMealsByCategory('Starter')">Starter</button>
+    <button (click)="getMealsByCategory('Vegan')">Vegan</button>
+    <button (click)="getMealsByCategory('Vegetarian')">Vegetarian</button>
+    <button (click)="getMealsByCategory('Breakfast')">Breakfast</button>
+    <button (click)="getMealsByCategory('Goat')">Goat</button>
+  </div>
 
   <div *ngIf="searchResults.length > 0">
     <h2>Search Results:</h2>

@@ -15,6 +15,8 @@ export class LandingComponent implements OnInit {
   searchResults: Meal[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 6;
+  selectedCategory: string = '';
+  randomRecipe: Meal | undefined;
 
   constructor(
     private recipeService: RecipeService,
@@ -27,9 +29,21 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  getRandomRecipe() {
+    this.recipeService.getRandomRecipe().subscribe(
+      (response) => {
+        this.searchResults[0] = response.meals?.[0];
+      },
+      (error) => {
+        console.error('Error when fetching random recipe:', error);
+      }
+    );
+  }
+
   clearSearchResults() {
     this.searchResults = [];
     this.searchService.setSearchResults(this.searchResults);
+    this.searchQuery = '';
   }
 
   searchRecipes() {
@@ -49,6 +63,20 @@ export class LandingComponent implements OnInit {
         );
     }
   }
+  getMealsByCategory(category: string): void {
+    this.currentPage = 1;
+    this.recipeService.getMealsByCategory(category).subscribe(
+      (response) => {
+        console.log(response);
+        this.searchResults = response.meals;
+        this.searchService.setSearchResults(this.searchResults);
+      },
+      (error) => {
+        console.error('Error when fetching meals by category:', error);
+      }
+    );
+  }
+
   get paginatedResults(): Meal[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;

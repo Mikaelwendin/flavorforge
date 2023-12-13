@@ -25,13 +25,13 @@ export class RecipeService {
       .pipe(tap((response) => console.log('API Response:', response)));
   }
 
-  getCategories(): Observable<any> {
-    const url = `${this.apiBaseUrl}/list.php?c=list`;
-    return this.http.get(url);
+  getMealsByCategory(category: string): Observable<MealResponse> {
+    const url = `${this.apiBaseUrl}/filter.php?c=${category}`;
+    return this.http.get<MealResponse>(url);
   }
-  getRecipesByCategory(category: string): Observable<any> {
-    const url = `${this.apiBaseUrl}/filter.php`;
-    const params = new HttpParams().set('c', category);
-    return this.http.get(url, { params });
+
+  getRandomRecipe(): Observable<MealResponse> {
+    const url = `${this.apiBaseUrl}/random.php`;
+    return this.http.get<MealResponse>(url);
   }
 }
