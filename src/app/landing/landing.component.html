@@ -37,8 +37,10 @@
         [routerLink]="['/recipe', recipe.idMeal]"
       >
         <div>
+          <h3>{{ recipe.strMeal }}</h3>
           <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
-          <p>{{ recipe.strMeal }}</p>
+          <p>{{ recipe.strCategory }}</p>
+          <p>{{ recipe.strArea }}</p>
         </div>
       </div>
     </div>

@@ -1,11 +1,20 @@
 <div>
   <button (click)="goBack()">Back to Search Results</button>
-  {{ meal?.idMeal }}
-  {{ meal?.strMeal }}
-</div>
-
-<div>
+  <h2>{{ meal?.strMeal }}</h2>
   <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
-  <p>{{ meal?.strMeal }}</p>
+  <ul>
+    <li *ngFor="let ingredient of getIngredientsArray(meal)">
+      {{ ingredient }}
+    </li>
+  </ul>
   <p>{{ meal?.strInstructions }}</p>
+  <div *ngIf="meal?.strYoutube" class="video-container">
+    <iframe
+      width="560"
+      height="315"
+      [src]="getVideoEmbedUrl(meal?.strYoutube)"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
 </div>

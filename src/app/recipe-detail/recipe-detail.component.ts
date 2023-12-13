@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
@@ -15,8 +16,31 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
+
+  getVideoEmbedUrl(url?: string): SafeResourceUrl | undefined {
+    if (url) {
+      const videoId = url.split('v=')[1];
+      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    }
+
+    return undefined;
+  }
+
+  getIngredientsArray(meal: Meal | undefined): string[] {
+    const ingredients: string[] = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = meal?.[`strIngredient${i}` as keyof Meal];
+      const mesurement = meal?.[`strMeasure${i}` as keyof Meal];
+      if (ingredient && mesurement) {
+        ingredients.push(mesurement + ' ' + ingredient);
+      }
+    }
+    return ingredients;
+  }
 
   ngOnInit(): void {
     console.log('Meal details:', this.meal);
