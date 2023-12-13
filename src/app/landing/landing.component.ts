@@ -30,6 +30,8 @@ export class LandingComponent implements OnInit {
   }
 
   getRandomRecipe() {
+    this.clearSearchResults();
+    this.currentPage = 1;
     this.recipeService.getRandomRecipe().subscribe(
       (response) => {
         this.searchResults[0] = response.meals?.[0];
