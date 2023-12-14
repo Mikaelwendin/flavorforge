@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from '../recipe/recipe.model';
 import { AuthService } from '../services/auth.service';
-import { RecipeService } from '../services/recipe.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -14,8 +13,7 @@ export class MyPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
-    private recipeService: RecipeService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
