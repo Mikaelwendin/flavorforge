@@ -34,7 +34,7 @@ export class UserEffects {
               uid: userDoc.id,
               email: userData.email || '',
               username: userData.username || '',
-              items: userData.items || [],
+              favoriteRecipes: userData.items || [],
             };
             return UserActions.loginSuccess({ user });
           }),
