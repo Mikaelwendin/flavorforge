@@ -1,6 +1,9 @@
 <div *ngIf="userFavorites.length > 0">
   <h2>Your Favorite Recipes:</h2>
-  <div *ngFor="let recipe of userFavorites">
+  <div
+    *ngFor="let recipe of userFavorites"
+    [routerLink]="['/recipe', recipe.idMeal]"
+  >
     <h3>{{ recipe.strMeal }}</h3>
     <p>{{ recipe.strInstructions }}</p>
   </div>

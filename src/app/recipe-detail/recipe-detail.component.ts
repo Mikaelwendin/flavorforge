@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +23,8 @@ export class RecipeDetailComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   getVideoEmbedUrl(url?: string): SafeResourceUrl | undefined {
@@ -64,7 +66,7 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
   goBack(): void {
-    this.router.navigate(['/']);
+    this.location.back();
   }
   addToFavorites(): void {
     if (this.meal && this.isUserLoggedIn()) {
