@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,13 +15,16 @@ import { UserService } from '../services/user.service';
 export class RecipeDetailComponent implements OnInit {
   recipeId: string | null | undefined;
   meal: Meal | undefined;
+  showIngredients: boolean = false;
+  showInstructions: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   getVideoEmbedUrl(url?: string): SafeResourceUrl | undefined {
@@ -62,7 +66,7 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
   goBack(): void {
-    this.router.navigate(['/']);
+    this.location.back();
   }
   addToFavorites(): void {
     if (this.meal && this.isUserLoggedIn()) {
@@ -75,5 +79,12 @@ export class RecipeDetailComponent implements OnInit {
 
   isUserLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+  toggleIngredients() {
+    this.showIngredients = !this.showIngredients;
+  }
+
+  toggleInstructions() {
+    this.showInstructions = !this.showInstructions;
   }
 }
