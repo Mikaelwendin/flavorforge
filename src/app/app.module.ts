@@ -18,6 +18,7 @@ import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { MyPageComponent } from './my-page/my-page.component';
+import { DisplayRecipesComponent } from './display-recipes/display-recipes.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MyPageComponent } from './my-page/my-page.component';
     NavigationComponent,
     RecipeDetailComponent,
     MyPageComponent,
+    DisplayRecipesComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,8 @@
 
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
   </form>
+  <h3>Not a member?</h3>
+  <a routerLink="/register">Register</a>
 </div>
 
 <div *ngIf="isLoggedIn">
