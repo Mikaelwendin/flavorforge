@@ -14,6 +14,8 @@ import { UserService } from '../services/user.service';
 export class RecipeDetailComponent implements OnInit {
   recipeId: string | null | undefined;
   meal: Meal | undefined;
+  showIngredients: boolean = false;
+  showInstructions: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
@@ -75,5 +77,12 @@ export class RecipeDetailComponent implements OnInit {
 
   isUserLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+  toggleIngredients() {
+    this.showIngredients = !this.showIngredients;
+  }
+
+  toggleInstructions() {
+    this.showInstructions = !this.showInstructions;
   }
 }

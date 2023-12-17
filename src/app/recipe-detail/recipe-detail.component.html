@@ -2,12 +2,15 @@
   <button (click)="goBack()">Back to Search Results</button>
   <h2>{{ meal?.strMeal }}</h2>
   <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
-  <ul>
+  <button (click)="toggleIngredients()">Toggle Ingredients</button>
+  <ul *ngIf="showIngredients">
     <li *ngFor="let ingredient of getIngredientsArray(meal)">
       {{ ingredient }}
     </li>
   </ul>
-  <p>{{ meal?.strInstructions }}</p>
+  <button (click)="toggleInstructions()">Toggle Instructions</button>
+  <p *ngIf="showInstructions">{{ meal?.strInstructions }}</p>
+
   <div *ngIf="meal?.strYoutube" class="video-container">
     <iframe
       width="560"
@@ -17,6 +20,7 @@
       allowfullscreen
     ></iframe>
   </div>
+
   <button *ngIf="isUserLoggedIn()" (click)="addToFavorites()">
     Add to Favorites
   </button>
