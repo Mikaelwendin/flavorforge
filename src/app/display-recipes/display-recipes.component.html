@@ -1,1 +1,53 @@
-<p>display-recipes works!</p>
+<div>
+  <h1>FlavorForge</h1>
+  <form (submit)="searchRecipes()">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search for recipes"
+      name="search"
+    />
+    <button type="submit">Search</button>
+    <button (click)="getRandomRecipe()" type="button">Random recipe!</button>
+  </form>
+  <button (click)="clearSearchResults()">Clear Search</button>
+  <div>
+    <h2>Search by Category:</h2>
+    <button (click)="getMealsByCategory('Beef')">Beef</button>
+    <button (click)="getMealsByCategory('Chicken')">Chicken</button>
+    <button (click)="getMealsByCategory('Dessert')">Dessert</button>
+    <button (click)="getMealsByCategory('Lamb')">Lamb</button>
+    <button (click)="getMealsByCategory('Miscellaneous')">Miscellaneous</button>
+    <button (click)="getMealsByCategory('Pasta')">Pasta</button>
+    <button (click)="getMealsByCategory('Pork')">Pork</button>
+    <button (click)="getMealsByCategory('Seafood')">Seafood</button>
+    <button (click)="getMealsByCategory('Side')">Side</button>
+    <button (click)="getMealsByCategory('Starter')">Starter</button>
+    <button (click)="getMealsByCategory('Vegan')">Vegan</button>
+    <button (click)="getMealsByCategory('Vegetarian')">Vegetarian</button>
+    <button (click)="getMealsByCategory('Breakfast')">Breakfast</button>
+    <button (click)="getMealsByCategory('Goat')">Goat</button>
+  </div>
+
+  <div *ngIf="searchResults.length > 0">
+    <h2>Search Results:</h2>
+    <div>
+      <div
+        *ngFor="let recipe of paginatedResults"
+        [routerLink]="['/recipe', recipe.idMeal]"
+      >
+        <div>
+          <h3>{{ recipe.strMeal }}</h3>
+          <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
+          <p>{{ recipe.strCategory }}</p>
+          <p>{{ recipe.strArea }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="searchResults.length > itemsPerPage">
+      <button *ngFor="let page of getPageArray()" (click)="onPageChange(page)">
+        {{ page }}
+      </button>
+    </div>
+  </div>
+</div>

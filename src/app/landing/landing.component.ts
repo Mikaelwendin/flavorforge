@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Meal } from '../recipe/recipe.model';
-import { RecipeService } from '../services/recipe.service';
-import { SearchService } from '../services/search.service';
+import { Component } from '@angular/core';
+import { DisplayRecipesComponent } from '../display-recipes/display-recipes.component';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
 })
-export class LandingComponent implements OnInit {
-  searchQuery: string = '';
+export class LandingComponent {
+  /* searchQuery: string = '';
   searchResults: Meal[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 6;
@@ -91,5 +87,5 @@ export class LandingComponent implements OnInit {
   getPageArray(): number[] {
     const pageCount = Math.ceil(this.searchResults.length / this.itemsPerPage);
     return Array.from({ length: pageCount }, (_, index) => index + 1);
-  }
+  } */
 }
