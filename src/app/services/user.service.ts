@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
+import { Meal } from '../recipe/recipe.model';
+import { User } from '../user/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  getUserData(userId: string): Observable<any> {
-    return this.afs.doc(`users/${userId}`).valueChanges();
+  addToFavorites(userId: string, recipe: Meal): Promise<void> {
+    const userRef = this.firestore.collection('users').doc(userId);
+
+    return userRef.update({
+      favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(recipe),
+    });
   }
 
-  updateUserData(userId: string, data: any): Promise<void> {
-    return this.afs.doc(`users/${userId}`).set(data, { merge: true });
+  getUser(userId: string): Observable<User | undefined> {
+    return this.firestore.doc<User>(`users/${userId}`).valueChanges();
   }
 }

@@ -17,4 +17,7 @@
       allowfullscreen
     ></iframe>
   </div>
+  <button *ngIf="isUserLoggedIn()" (click)="addToFavorites()">
+    Add to Favorites
+  </button>
 </div>

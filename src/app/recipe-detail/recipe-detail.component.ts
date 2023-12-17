@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meal } from '../recipe/recipe.model';
+import { AuthService } from '../services/auth.service';
 import { RecipeService } from '../services/recipe.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,12 +14,13 @@ import { RecipeService } from '../services/recipe.service';
 export class RecipeDetailComponent implements OnInit {
   recipeId: string | null | undefined;
   meal: Meal | undefined;
-
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   getVideoEmbedUrl(url?: string): SafeResourceUrl | undefined {
@@ -60,5 +63,17 @@ export class RecipeDetailComponent implements OnInit {
   }
   goBack(): void {
     this.router.navigate(['/']);
+  }
+  addToFavorites(): void {
+    if (this.meal && this.isUserLoggedIn()) {
+      const currentUser = this.authService.getCurrentUser();
+      if (currentUser) {
+        this.userService.addToFavorites(currentUser.uid, this.meal);
+      }
+    }
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

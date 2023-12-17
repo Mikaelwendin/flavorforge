@@ -11,6 +11,10 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$: Observable<boolean> =
     this.isAuthenticatedSubject.asObservable();
+  private currentUserSubject =
+    new BehaviorSubject<firebase.default.User | null>(null);
+  currentUser$: Observable<firebase.default.User | null> =
+    this.currentUserSubject.asObservable();
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -21,6 +25,7 @@ export class AuthService {
         tap((user) => {
           const isAuthenticated = !!user;
           this.isAuthenticatedSubject.next(isAuthenticated);
+          this.currentUserSubject.next(user);
         })
       )
       .subscribe();
@@ -40,7 +45,7 @@ export class AuthService {
               uid: uid,
               email: email,
               username: username,
-              items: [],
+              favoriteRecipes: [],
             });
           })
           .then(() => {
@@ -61,5 +66,11 @@ export class AuthService {
     return this.afAuth.signOut().then(() => {
       this.isAuthenticatedSubject.next(false);
     });
+  }
+  isLoggedIn(): boolean {
+    return this.isAuthenticatedSubject.value;
+  }
+  getCurrentUser(): firebase.default.User | null {
+    return this.currentUserSubject.value;
   }
 }

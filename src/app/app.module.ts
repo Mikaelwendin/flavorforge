@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { MyPageComponent } from './my-page/my-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
     RegisterComponent,
     NavigationComponent,
     RecipeDetailComponent,
+    MyPageComponent,
   ],
   imports: [
     BrowserModule,
