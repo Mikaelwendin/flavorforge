@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DisplayRecipesComponent } from './display-recipes/display-recipes.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { MyPageComponent } from './my-page/my-page.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'recipe/:id', component: RecipeDetailComponent },
+  { path: 'recipe', component: DisplayRecipesComponent },
   {
     path: 'my-page',
     component: MyPageComponent,

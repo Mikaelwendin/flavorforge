@@ -1,27 +1,32 @@
 <div>
-  <button (click)="goBack()">Back to Search Results</button>
+  <button type="button" (click)="goBack()">Back</button>
   <h2>{{ meal?.strMeal }}</h2>
   <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
-  <button (click)="toggleIngredients()">Toggle Ingredients</button>
+  <button type="button" (click)="toggleIngredients()">
+    Toggle Ingredients
+  </button>
   <ul *ngIf="showIngredients">
     <li *ngFor="let ingredient of getIngredientsArray(meal)">
       {{ ingredient }}
     </li>
   </ul>
-  <button (click)="toggleInstructions()">Toggle Instructions</button>
+  <button type="button" (click)="toggleInstructions()">
+    Toggle Instructions
+  </button>
   <p *ngIf="showInstructions">{{ meal?.strInstructions }}</p>
 
-  <div *ngIf="meal?.strYoutube" class="video-container">
+  <!-- <div *ngIf="meal?.strYoutube" class="video-container">
     <iframe
+      title="Video"
       width="560"
-      height="315"
+      height="315"                                                            // FIX IFRAME BUG
       [src]="getVideoEmbedUrl(meal?.strYoutube)"
       frameborder="0"
       allowfullscreen
     ></iframe>
-  </div>
+  </div> -->
 
-  <button *ngIf="isUserLoggedIn()" (click)="addToFavorites()">
+  <button type="button" *ngIf="isUserLoggedIn()" (click)="addToFavorites()">
     Add to Favorites
   </button>
 </div>
