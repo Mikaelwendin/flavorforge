@@ -1,0 +1,8 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2>Select a Recipe</h2>
+    <div *ngFor="let recipe of userFavorites" (click)="selectRecipe(recipe)">
+      {{ recipe.strMeal }}
+    </div>
+  </div>
+</div>

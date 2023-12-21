@@ -1,0 +1,11 @@
+<div *ngFor="let day of daysOfWeek" class="day-column">
+  <div class="day-header" (click)="openRecipeSelectorModal(day)">
+    {{ day }}
+    <div *ngIf="plannedWeek[day]">{{ plannedWeek[day].strMeal }}</div>
+  </div>
+</div>
+
+<app-recipe-modal
+  #recipeModal
+  (recipeSelected)="handleRecipeSelection($event)"
+></app-recipe-modal>

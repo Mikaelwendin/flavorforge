@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -12,11 +13,13 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayRecipesComponent } from './display-recipes/display-recipes.component';
+import { FoodPlannerComponent } from './food-planner/food-planner.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
 import { RegisterComponent } from './register/register.component';
 import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
@@ -31,6 +34,8 @@ import { userReducer } from './user/user.reducer';
     RecipeDetailComponent,
     MyPageComponent,
     DisplayRecipesComponent,
+    RecipeModalComponent,
+    FoodPlannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { userReducer } from './user/user.reducer';
     EffectsModule.forRoot([UserEffects]),
     HttpClientModule,
     BrowserAnimationsModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
