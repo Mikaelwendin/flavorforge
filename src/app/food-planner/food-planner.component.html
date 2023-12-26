@@ -7,5 +7,5 @@
 
 <app-recipe-modal
   #recipeModal
-  (recipeSelected)="handleRecipeSelection($event)"
+  [userFavorites]="userFavorites"
 ></app-recipe-modal>

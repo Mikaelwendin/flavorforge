@@ -10,12 +10,21 @@ export class RecipeModalComponent {
   @Input() userFavorites!: Meal[];
   @Output() recipeSelected = new EventEmitter<Meal>();
 
-  showModal(): void {
-    // SLäng in show logic scss?
-    console.log('showmodal!');
-  }
+  private selectedRecipe?: Meal;
+  showModal = false;
 
   selectRecipe(recipe: Meal): void {
+    this.selectedRecipe = recipe;
     this.recipeSelected.emit(recipe);
+    this.hide();
+  }
+
+  hide(): void {
+    this.selectedRecipe = undefined;
+    this.showModal = false;
+  }
+
+  show(): void {
+    this.showModal = true;
   }
 }
