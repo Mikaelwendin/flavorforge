@@ -10,10 +10,15 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   username: string = '';
+  confirmPassword: string = '';
 
   constructor(private authService: AuthService) {}
 
   register() {
+    if (this.password !== this.confirmPassword) {
+      console.log('Passwords do not match');
+      return;
+    }
     this.authService
       .register(this.email, this.password, this.username)
       .then((response) => {
