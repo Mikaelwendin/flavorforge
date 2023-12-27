@@ -22,6 +22,10 @@ export class FoodPlannerComponent implements OnInit {
     'Sunday',
   ];
   plannedWeek: { [day: string]: Meal } = {};
+  shoppingList: {
+    [day: string]: { ingredient: string; measurement: string }[];
+  } = {};
+  expandedRecipes: { [day: string]: boolean } = {};
 
   @ViewChild(RecipeModalComponent) recipeModal!: RecipeModalComponent;
 
@@ -75,5 +79,27 @@ export class FoodPlannerComponent implements OnInit {
           console.error('Error updating user:', error);
         });
     }
+  }
+  getIngredients(recipe: Meal): string[] {
+    const ingredients: string[] = [];
+
+    for (let i = 1; i <= 20; i++) {
+      const ingredientKey = `strIngredient${i}` as keyof Meal;
+      const measureKey = `strMeasure${i}` as keyof Meal;
+
+      if (recipe[ingredientKey] && recipe[measureKey]) {
+        ingredients.push(`${recipe[ingredientKey]}: ${recipe[measureKey]}`);
+      }
+    }
+
+    return ingredients;
+  }
+
+  toggleRecipe(day: string): void {
+    this.expandedRecipes[day] = !this.expandedRecipes[day];
+  }
+
+  isExpanded(day: string): boolean {
+    return !!this.expandedRecipes[day];
   }
 }

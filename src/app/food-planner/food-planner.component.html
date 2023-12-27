@@ -1,7 +1,16 @@
 <div *ngFor="let day of daysOfWeek" class="day-column">
-  <div class="day-header" (click)="openRecipeSelectorModal(day)">
+  <div class="day-header" (click)="toggleRecipe(day)">
     {{ day }}
-    <div *ngIf="plannedWeek[day]">{{ plannedWeek[day].strMeal }}</div>
+    <div *ngIf="plannedWeek[day]">
+      <h3>{{ plannedWeek[day].strMeal }}</h3>
+      <div *ngIf="isExpanded(day)">
+        <ul>
+          <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
+            {{ ingredient }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
