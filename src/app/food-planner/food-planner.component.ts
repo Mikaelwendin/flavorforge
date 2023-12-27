@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
 import { RecipeModalComponent } from '../recipe-modal/recipe-modal.component';
 import { Meal } from '../recipe/recipe.model';
@@ -26,12 +26,14 @@ export class FoodPlannerComponent implements OnInit {
     [day: string]: { ingredient: string; measurement: string }[];
   } = {};
   expandedRecipes: { [day: string]: boolean } = {};
+  currentDay: string = '';
 
   @ViewChild(RecipeModalComponent) recipeModal!: RecipeModalComponent;
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class FoodPlannerComponent implements OnInit {
         this.plannedWeek = userData?.plannedWeek || {};
       });
     }
+    this.updateCurrentDay();
   }
 
   openRecipeSelectorModal(day: string): void {
@@ -101,5 +104,15 @@ export class FoodPlannerComponent implements OnInit {
 
   isExpanded(day: string): boolean {
     return !!this.expandedRecipes[day];
+  }
+  isCurrentDay(day: string): boolean {
+    return this.currentDay.toLowerCase() === day.toLowerCase();
+  }
+  updateCurrentDay(): void {
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
+    const today = new Date().toLocaleDateString('en-US', options);
+    this.currentDay = today.toLowerCase();
+    console.log(this.currentDay);
+    this.cdr.detectChanges();
   }
 }
