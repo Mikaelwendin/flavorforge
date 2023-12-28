@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'my-page',
     component: MyPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // TODO: Put authguard on foodplanner maybe?
   },
 ];
 

@@ -27,6 +27,7 @@ export class FoodPlannerComponent implements OnInit {
   } = {};
   expandedRecipes: { [day: string]: boolean } = {};
   currentDay: string = '';
+  loading = true;
 
   @ViewChild(RecipeModalComponent) recipeModal!: RecipeModalComponent;
 
@@ -37,6 +38,7 @@ export class FoodPlannerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     const user = this.authService.getCurrentUser();
     if (user) {
       this.userService.getUser(user.uid).subscribe((userData) => {
@@ -45,6 +47,9 @@ export class FoodPlannerComponent implements OnInit {
       });
     }
     this.updateCurrentDay();
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   }
 
   openRecipeSelectorModal(day: string): void {
