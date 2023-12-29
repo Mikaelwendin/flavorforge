@@ -22,4 +22,8 @@ export class UserService {
   getUser(userId: string): Observable<User | undefined> {
     return this.firestore.doc<User>(`users/${userId}`).valueChanges();
   }
+
+  updateUser(uid: string, data: Partial<User>): Promise<void> {
+    return this.firestore.collection('users').doc(uid).update(data);
+  }
 }

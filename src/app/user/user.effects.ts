@@ -40,9 +40,11 @@ export class UserEffects {
           }),
           catchError((error) => of(UserActions.loginFailure({ error })))
         )
-      )
+      ),
+      catchError((error) => of(UserActions.loginFailure({ error })))
     )
   );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

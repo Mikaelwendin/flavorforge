@@ -2,9 +2,13 @@
   <ul>
     <li><a routerLink="/">Home</a></li>
     <li><a routerLink="/recipe">Recipes</a></li>
-    <li><a routerLink="/login">Login</a></li>
-    <li *ngIf="isLoggedIn"><a routerLink="/my-page">My page</a></li>
+    <li>
+      <a routerLink="/{{ isLoggedIn ? 'my-page' : 'login' }}">{{
+        isLoggedIn ? "My page" : "Login"
+      }}</a>
+    </li>
     <li>About</li>
   </ul>
   <h3 *ngIf="isLoggedIn">{{ "Logged in" }}</h3>
 </div>
+<!-- TODO: Lets make my-page into login when not logged in.  -->
