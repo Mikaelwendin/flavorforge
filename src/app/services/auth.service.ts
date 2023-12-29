@@ -30,6 +30,11 @@ export class AuthService {
         })
       )
       .subscribe();
+    this.afAuth.onAuthStateChanged((user) => {
+      if (!user) {
+        this.logout();
+      }
+    });
   }
 
   async register(
