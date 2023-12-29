@@ -1,6 +1,12 @@
 @import "/src/assets/styles/mixins.scss";
 
 .navigation {
+  @include from-md {
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+  }
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -8,8 +14,11 @@
   width: 100%;
 
   .burger__menu {
+    @include from-md {
+      display: none;
+    }
     width: 50px;
-    padding: 5px;
+    padding: 20px;
     height: fit-content;
     transition: 0.3s ease;
     display: block;
@@ -17,23 +26,19 @@
     z-index: 3;
     position: fixed;
     top: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 1px 13px -1px rgba(0, 0, 0, 0.51);
-    -webkit-box-shadow: 0px 1px 13px -1px rgba(0, 0, 0, 0.51);
-    -moz-box-shadow: 0px 1px 13px -1px rgba(0, 0, 0, 0.51);
 
     .bar1,
     .bar2,
     .bar3 {
       width: 100%;
       height: 5px;
-      background-color: #000;
+      background-color: #ffffff;
       border-radius: 2px;
       margin: 5px 0;
       transition: 0.3s ease-in-out;
 
       &.transform {
-        background-color: #345;
+        background-color: rgb(193, 193, 193);
       }
     }
 
@@ -51,7 +56,12 @@
   }
 
   nav {
-    width: 50%;
+    @include from-md {
+      padding: unset;
+      position: relative;
+      width: 100% !important;
+    }
+    width: 100%;
     height: 100vh;
     opacity: 0;
     transform: scale(0);
@@ -76,6 +86,9 @@
     }
 
     ul {
+      @include from-md {
+        gap: 6rem;
+      }
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -83,11 +96,12 @@
       gap: 2rem;
 
       li {
+        list-style-type: none;
         a {
           font-size: 1rem;
           font-weight: 700;
           text-decoration: none;
-          color: #000;
+          color: #ffffff;
           text-transform: uppercase;
           transition: border 0.3s ease;
         }

@@ -1,1 +1,13 @@
 @import "normalize.css";
+
+.background-container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+
+  &.landing {
+    background-image: url("./assets/images/vintage-old-rustic-cutlery-dark.jpg"); //<a href="https://www.freepik.com/free-photo/vintage-old-rustic-cutlery-dark_6216945.htm#query=food%20black%20background&position=0&from_view=keyword&track=ais&uuid=7a949fe1-5941-40e6-9e4e-3686c1e199be">Image by valeria_aksakova</a> on Freepik
+  }
+}
