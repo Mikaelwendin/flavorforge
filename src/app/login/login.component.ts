@@ -18,6 +18,8 @@ export class LoginComponent {
   user: User | null = null;
   userSubscription: Subscription;
   isLoggedIn: boolean = false;
+  isLoggingIn: boolean = false;
+  loginError: string | null = null;
 
   constructor(
     private store: Store,
@@ -34,10 +36,28 @@ export class LoginComponent {
     });
   }
 
-  login() {
-    this.store.dispatch(
-      UserActions.login({ email: this.email, password: this.password })
-    );
+  async login() {
+    this.isLoggingIn = true;
+    this.loginError = null;
+    if (!this.isValidEmail(this.email)) {
+      this.loginError = 'Please enter a valid email address.';
+      this.isLoggingIn = false;
+      return;
+    }
+
+    try {
+      await this.authService.login(this.email, this.password);
+    } catch (error) {
+      this.loginError = 'Invalid email or password. Please try again.';
+    } finally {
+      this.isLoggingIn = false;
+      this.navigateToLandingPage();
+    }
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   async logOut() {

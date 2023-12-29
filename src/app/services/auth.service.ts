@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FirebaseError } from '@angular/fire/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -58,8 +59,20 @@ export class AuthService {
       });
   }
 
-  login(email: string, password: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  async login(email: string, password: string): Promise<any> {
+    try {
+      const userCredential = await this.afAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log('Successfully signed in:', user?.displayName);
+      return user;
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+      console.warn('Login error:', firebaseError.message);
+      throw firebaseError;
+    }
   }
 
   logout(): Promise<any> {

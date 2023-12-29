@@ -1,6 +1,6 @@
 <div>
   <h2>Create an account</h2>
-  <form (ngSubmit)="register()">
+  <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
     <label>Email:</label>
     <input type="email" [(ngModel)]="email" name="email" required />
 
@@ -18,6 +18,15 @@
     <label>Username:</label>
     <input type="text" [(ngModel)]="username" name="username" required />
 
-    <button type="submit">Register</button>
+    <button type="submit" [disabled]="isSubmitting">Register</button>
+
+    <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
+
+    <div *ngIf="registrationSuccess" class="success-message">
+      Registration successful! Redirecting...
+    </div>
+    <div *ngIf="registrationError" class="error-message">
+      Registration failed: {{ registrationErrorMessage }}
+    </div>
   </form>
 </div>
