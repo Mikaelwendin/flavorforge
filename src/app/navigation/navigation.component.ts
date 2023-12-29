@@ -13,6 +13,8 @@ import { selectUser } from '../user/user.selectors';
 export class NavigationComponent {
   isLoggedIn: boolean = false;
   user$: Observable<User | null>;
+  activeMenu: boolean = false;
+  showMenu: boolean = false;
 
   constructor(private authService: AuthService, private store: Store) {
     this.authService.isAuthenticated$.subscribe((loggedIn) => {
@@ -21,4 +23,8 @@ export class NavigationComponent {
     });
     this.user$ = this.store.select(selectUser);
   }
+  public menuOnClick = () => {
+    this.activeMenu = !this.activeMenu;
+    this.showMenu = this.activeMenu;
+  };
 }

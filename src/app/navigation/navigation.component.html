@@ -1,14 +1,34 @@
-<div>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/recipe">Recipes</a></li>
-    <li>
-      <a routerLink="/{{ isLoggedIn ? 'my-page' : 'login' }}">{{
-        isLoggedIn ? "My page" : "Login"
-      }}</a>
-    </li>
-    <li>About</li>
-  </ul>
-  <h3 *ngIf="isLoggedIn">{{ "Logged in" }}</h3>
+<div class="navigation">
+  <div class="burger__menu" (click)="menuOnClick()">
+    <div [ngClass]="{ transform: showMenu }" class="bar1"></div>
+    <div [ngClass]="{ transform: showMenu }" class="bar2"></div>
+    <div [ngClass]="{ transform: showMenu }" class="bar3"></div>
+  </div>
+  <nav [ngClass]="{ show__menu: showMenu }">
+    <ul>
+      <li>
+        <a class="nav__links" (click)="menuOnClick()" routerLink="/">Home</a>
+      </li>
+      <li>
+        <a class="nav__links" (click)="menuOnClick()" routerLink="/recipe"
+          >Recipes</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav__links"
+          (click)="menuOnClick()"
+          [routerLink]="isLoggedIn ? 'my-page' : 'login'"
+        >
+          {{ isLoggedIn ? "My page" : "Login" }}
+        </a>
+      </li>
+      <li>
+        <a class="nav__links" (click)="menuOnClick()" routerLink="/">About</a>
+      </li>
+    </ul>
+    <h3 *ngIf="isLoggedIn">{{ "Logged in" }}</h3>
+  </nav>
 </div>
+
 <!-- TODO: Lets make my-page into login when not logged in.  -->
