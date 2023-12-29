@@ -1,0 +1,79 @@
+@import "/src/assets/styles/variables.scss";
+.background-container.recipes {
+  display: flex;
+  justify-content: flex-start;
+  .recipe__container {
+    display: flex;
+    width: 42vw;
+    flex-direction: column;
+    margin: 8rem 3rem;
+    gap: 2rem;
+
+    &-category {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    & .searchForm {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & .header__secondary {
+      color: #ffff;
+      font-size: 1.6rem;
+      font-family: $header;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      -webkit-user-select: none;
+      user-select: none;
+      width: 100%;
+      text-align: center;
+    }
+    .search__container {
+      display: flex;
+      flex-wrap: wrap;
+
+      .search__container-results {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        & img {
+          width: 70%;
+          margin: 10px;
+          border-radius: 15px;
+          transition: 0.5s;
+          --s: 10px;
+          padding: var(--s);
+          border: calc(2 * var(--s)) solid #0000;
+          outline: 1px solid #c2c2c2;
+          outline-offset: calc(-1 * var(--s));
+          background: conic-gradient(
+            from 90deg at 1px 1px,
+            #0000 25%,
+            #c2c2c2 0
+          );
+          &:hover {
+            outline-offset: 0;
+            cursor: pointer;
+          }
+        }
+        & h3 {
+          color: #ffff;
+          font-family: $header;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          -webkit-user-select: none;
+          user-select: none;
+          text-wrap: wrap;
+          text-align: center;
+          max-width: 15vw;
+        }
+      }
+    }
+  }
+}

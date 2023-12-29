@@ -99,6 +99,7 @@ export class DisplayRecipesComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.currentPage = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   getPageArray(): number[] {
     const pageCount = Math.ceil(this.searchResults.length / this.itemsPerPage);

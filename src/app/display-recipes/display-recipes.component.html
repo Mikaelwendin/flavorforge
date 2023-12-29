@@ -1,66 +1,165 @@
-<div>
-  <h1>FlavorForge</h1>
-  <form (submit)="searchRecipes()">
-    <input
-      type="text"
-      [(ngModel)]="searchQuery"
-      placeholder="Search for recipes"
-      name="search"
-    />
-    <button type="submit">Search</button>
-    <button (click)="getRandomRecipe()" type="button">Random recipe!</button>
-  </form>
-  <button (click)="clearSearchResults()">Clear Search</button>
-  <div>
-    <h2>Search by Category:</h2>
-    <button (click)="getMealsByCategory('Beef')">Beef</button>
-    <button (click)="getMealsByCategory('Chicken')">Chicken</button>
-    <button (click)="getMealsByCategory('Dessert')">Dessert</button>
-    <button (click)="getMealsByCategory('Lamb')">Lamb</button>
-    <button (click)="getMealsByCategory('Miscellaneous')">Miscellaneous</button>
-    <button (click)="getMealsByCategory('Pasta')">Pasta</button>
-    <button (click)="getMealsByCategory('Pork')">Pork</button>
-    <button (click)="getMealsByCategory('Seafood')">Seafood</button>
-    <button (click)="getMealsByCategory('Side')">Side</button>
-    <button (click)="getMealsByCategory('Starter')">Starter</button>
-    <button (click)="getMealsByCategory('Vegan')">Vegan</button>
-    <button (click)="getMealsByCategory('Vegetarian')">Vegetarian</button>
-    <button (click)="getMealsByCategory('Breakfast')">Breakfast</button>
-    <button (click)="getMealsByCategory('Goat')">Goat</button>
-  </div>
-
-  <div *ngIf="loading; else content">
-    <mat-progress-spinner
-      mode="indeterminate"
-      diameter="100"
-      color="#2196F3"
-    ></mat-progress-spinner>
-  </div>
-
-  <ng-template #content>
-    <div *ngIf="searchResults.length > 0">
-      <h2>Search Results:</h2>
+<div class="background-container recipes">
+  <div class="recipe__container">
+    <form class="searchForm" (submit)="searchRecipes()">
+      <input
+        class="input__text"
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search for recipes"
+        name="search"
+      />
       <div>
-        <div
-          *ngFor="let recipe of paginatedResults"
-          [routerLink]="['/recipe', recipe.idMeal]"
-        >
-          <div>
-            <h3>{{ recipe.strMeal }}</h3>
-            <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
-            <p>{{ recipe.strCategory }}</p>
-            <p>{{ recipe.strArea }}</p>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="searchResults.length > itemsPerPage">
-        <button
-          *ngFor="let page of getPageArray()"
-          (click)="onPageChange(page)"
-        >
-          {{ page }}
+        <button class="btn btn__main" type="submit">Search</button>
+        <button class="btn btn__main" (click)="getRandomRecipe()" type="button">
+          Random
         </button>
       </div>
+    </form>
+    <button
+      class="btn btn__secondary"
+      type="button"
+      (click)="clearSearchResults()"
+    >
+      Clear Search
+    </button>
+    <div class="recipe__container-category">
+      <h2 class="header__secondary">Search by Category</h2>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Beef')"
+      >
+        Beef
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Chicken')"
+      >
+        Chicken
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Dessert')"
+      >
+        Dessert
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Lamb')"
+      >
+        Lamb
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Miscellaneous')"
+      >
+        Miscellaneous
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Pasta')"
+      >
+        Pasta
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Pork')"
+      >
+        Pork
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Seafood')"
+      >
+        Seafood
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Side')"
+      >
+        Side
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Starter')"
+      >
+        Starter
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Vegan')"
+      >
+        Vegan
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Vegetarian')"
+      >
+        Vegetarian
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Breakfast')"
+      >
+        Breakfast
+      </button>
+      <button
+        class="btn btn__third"
+        type="button"
+        (click)="getMealsByCategory('Goat')"
+      >
+        Goat
+      </button>
     </div>
-  </ng-template>
+
+    <div *ngIf="loading; else content">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="100"
+        color="#2196F3"
+      ></mat-progress-spinner>
+    </div>
+
+    <ng-template #content>
+      <div *ngIf="searchResults.length > 0">
+        <h2 class="header__secondary">Search Results:</h2>
+        <div class="search__container">
+          <div
+            *ngFor="let recipe of paginatedResults"
+            [routerLink]="['/recipe', recipe.idMeal]"
+          >
+            <div class="search__container-results">
+              <h3>{{ recipe.strMeal }}</h3>
+              <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
+              <p>{{ recipe.strCategory }}</p>
+              <p>{{ recipe.strArea }}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="searchResults.length > itemsPerPage">
+          <button
+            class="btn btn__secondary"
+            type="button"
+            *ngFor="let page of getPageArray()"
+            (click)="onPageChange(page)"
+            [ngClass]="{ 'active-page': page === currentPage }"
+          >
+            {{ page }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>

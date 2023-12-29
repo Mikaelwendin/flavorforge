@@ -1,3 +1,5 @@
+@import "/src/assets/styles/variables.scss";
+
 .background-container.landing {
   display: flex;
   align-items: center;
@@ -6,7 +8,7 @@
   & .landing__logo {
     color: #ffff;
     font-size: 3rem;
-    font-family: "Playfair Display", serif;
+    font-family: $header;
     letter-spacing: 3px;
     text-transform: uppercase;
     -webkit-user-select: none;
