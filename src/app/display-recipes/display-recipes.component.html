@@ -8,25 +8,25 @@
         placeholder="Search for recipes"
         name="search"
       />
-      <div>
+      <div class="searchForm-btns">
         <button class="btn btn__main" type="submit">Search</button>
         <button class="btn btn__main" (click)="getRandomRecipe()" type="button">
           Random
         </button>
+        <button
+          class="btn btn__secondary"
+          type="button"
+          (click)="clearSearchResults()"
+        >
+          Clear Search
+        </button>
       </div>
     </form>
-    <button
-      class="btn btn__secondary"
-      type="button"
-      (click)="clearSearchResults()"
-    >
-      Clear Search
-    </button>
     <div class="recipe__container-category">
       <h2 class="header__secondary">Search by Category</h2>
       <select
         title="category-select"
-        class="btn btn__third"
+        class="btn btn__select"
         (change)="getMealsByCategory($event)"
       >
         <option value="" disabled selected>Select an option</option>

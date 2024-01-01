@@ -19,6 +19,10 @@
     & .searchForm {
       display: flex;
       flex-direction: column;
+
+      & .searchForm-btns {
+        margin-top: 1rem;
+      }
     }
 
     & .header__secondary {
@@ -30,7 +34,6 @@
       -webkit-user-select: none;
       user-select: none;
       width: 100%;
-      text-align: center;
     }
     .search__container {
       display: flex;

@@ -19,10 +19,11 @@
 .input__text {
   padding: 10px;
   border-radius: 10px;
-  width: 20vw;
+  width: 22vw;
 }
 
 .btn {
+  margin: 1px;
   width: 8vw;
   padding: 10px;
   background-color: #000;
@@ -30,6 +31,9 @@
   border-radius: 10px;
   color: #fff;
   transition: 0.3s;
+  box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
+  -webkit-box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
+  -moz-box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
 
   &:hover {
     cursor: pointer;
@@ -40,14 +44,17 @@
     &.active-page {
       background-color: #2f2f2f;
     }
+  }
+  &__main {
+  }
 
-    &__main {
-    }
+  &__secondary {
+  }
 
-    &__secondary {
-    }
+  &__select {
+    min-width: 15vw !important;
 
-    &__third {
+    &:hover {
     }
   }
 }
