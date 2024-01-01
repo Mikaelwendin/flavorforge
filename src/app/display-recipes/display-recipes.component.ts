@@ -73,7 +73,8 @@ export class DisplayRecipesComponent implements OnInit {
       this.loading = false;
     }, 500);
   }
-  getMealsByCategory(category: string): void {
+  getMealsByCategory(event: Event): void {
+    const category = (event.target as HTMLSelectElement).value;
     this.loading = true;
     this.currentPage = 1;
     this.recipeService.getMealsByCategory(category).subscribe(
@@ -84,11 +85,13 @@ export class DisplayRecipesComponent implements OnInit {
       },
       (error) => {
         console.error('Error when fetching meals by category:', error);
+      },
+      () => {
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
       }
     );
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
   }
 
   get paginatedResults(): Meal[] {

@@ -24,104 +24,27 @@
     </button>
     <div class="recipe__container-category">
       <h2 class="header__secondary">Search by Category</h2>
-      <button
+      <select
+        title="category-select"
         class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Beef')"
+        (change)="getMealsByCategory($event)"
       >
-        Beef
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Chicken')"
-      >
-        Chicken
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Dessert')"
-      >
-        Dessert
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Lamb')"
-      >
-        Lamb
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Miscellaneous')"
-      >
-        Miscellaneous
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Pasta')"
-      >
-        Pasta
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Pork')"
-      >
-        Pork
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Seafood')"
-      >
-        Seafood
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Side')"
-      >
-        Side
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Starter')"
-      >
-        Starter
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Vegan')"
-      >
-        Vegan
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Vegetarian')"
-      >
-        Vegetarian
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Breakfast')"
-      >
-        Breakfast
-      </button>
-      <button
-        class="btn btn__third"
-        type="button"
-        (click)="getMealsByCategory('Goat')"
-      >
-        Goat
-      </button>
+        <option value="" disabled selected>Select an option</option>
+        <option value="Beef">Beef</option>
+        <option value="Chicken">Chicken</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Lamb">Lamb</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+        <option value="Pasta">Pasta</option>
+        <option value="Pork">Pork</option>
+        <option value="Seafood">Seafood</option>
+        <option value="Side">Side</option>
+        <option value="Starter">Starter</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Goat">Goat</option>
+      </select>
     </div>
 
     <div *ngIf="loading; else content">
