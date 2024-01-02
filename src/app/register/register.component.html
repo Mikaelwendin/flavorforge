@@ -1,32 +1,34 @@
-<div>
-  <h2>Create an account</h2>
-  <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+<div class="background-container register">
+  <div>
+    <h2>Create an account</h2>
+    <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="email" name="email" required />
 
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
+      <label>Password:</label>
+      <input type="password" [(ngModel)]="password" name="password" required />
 
-    <label>Confirm Password:</label>
-    <input
-      type="password"
-      [(ngModel)]="confirmPassword"
-      name="confirmPassword"
-      required
-    />
+      <label>Confirm Password:</label>
+      <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        required
+      />
 
-    <label>Username:</label>
-    <input type="text" [(ngModel)]="username" name="username" required />
+      <label>Username:</label>
+      <input type="text" [(ngModel)]="username" name="username" required />
 
-    <button type="submit" [disabled]="isSubmitting">Register</button>
+      <button type="submit" [disabled]="isSubmitting">Register</button>
 
-    <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
+      <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
 
-    <div *ngIf="registrationSuccess" class="success-message">
-      Registration successful! Redirecting...
-    </div>
-    <div *ngIf="registrationError" class="error-message">
-      Registration failed: {{ registrationErrorMessage }}
-    </div>
-  </form>
+      <div *ngIf="registrationSuccess" class="success-message">
+        Registration successful! Redirecting...
+      </div>
+      <div *ngIf="registrationError" class="error-message">
+        Registration failed: {{ registrationErrorMessage }}
+      </div>
+    </form>
+  </div>
 </div>
