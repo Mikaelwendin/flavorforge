@@ -8,18 +8,40 @@ import { MyPageComponent } from './my-page/my-page.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './services/auth.guard';
+
 const routes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'landing', component: LandingComponent },
-  { path: 'recipe/:id', component: RecipeDetailComponent },
-  { path: 'recipe', component: DisplayRecipesComponent },
-  { path: 'food-planner', component: FoodPlannerComponent },
+  { path: '', component: LandingComponent, data: { animation: 'landing' } },
+  { path: 'login', component: LoginComponent, data: { animation: 'login' } },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { animation: 'register' },
+  },
+  {
+    path: 'landing',
+    component: LandingComponent,
+    data: { animation: 'landing' },
+  },
+  {
+    path: 'recipe/:id',
+    component: RecipeDetailComponent,
+    data: { animation: 'recipe-detail' },
+  },
+  {
+    path: 'recipe',
+    component: DisplayRecipesComponent,
+    data: { animation: 'display-recipes' },
+  },
+  {
+    path: 'food-planner',
+    component: FoodPlannerComponent,
+    data: { animation: 'food-planner' },
+  },
   {
     path: 'my-page',
     component: MyPageComponent,
-    canActivate: [AuthGuard], // TODO: Put authguard on foodplanner maybe?
+    canActivate: [AuthGuard],
+    data: { animation: 'my-page' },
   },
 ];
 

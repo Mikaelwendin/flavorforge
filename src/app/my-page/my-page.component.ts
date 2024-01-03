@@ -45,9 +45,7 @@ export class MyPageComponent implements OnInit {
         this.userFavorites = userData?.favoriteRecipes || [];
       });
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+    this.loading = false;
   }
   async logOut() {
     await this.authService.logout();

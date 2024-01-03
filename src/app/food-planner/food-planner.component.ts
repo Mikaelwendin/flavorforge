@@ -47,9 +47,7 @@ export class FoodPlannerComponent implements OnInit {
       });
     }
     this.updateCurrentDay();
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+    this.loading = false;
   }
 
   openRecipeSelectorModal(day: string): void {

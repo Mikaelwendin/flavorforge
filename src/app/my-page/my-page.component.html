@@ -1,27 +1,31 @@
-<div *ngIf="isLoggedIn">
-  <button (click)="logOut()">Logout</button>
-</div>
+<div class="background-container my-page">
+  <div *ngIf="isLoggedIn">
+    <button (click)="logOut()">Logout</button>
+  </div>
 
-<div *ngIf="loading; else content">
-  <mat-progress-spinner
-    mode="indeterminate"
-    diameter="100"
-    color="#2196F3"
-  ></mat-progress-spinner>
-</div>
+  <div *ngIf="loading; else content">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="100"
+      color="#2196F3"
+    ></mat-progress-spinner>
+  </div>
 
-<ng-template #content>
-  <div *ngIf="userFavorites.length > 0">
-    <h2>Your Favorite Recipes:</h2>
-    <div
-      *ngFor="let recipe of userFavorites"
-      [routerLink]="['/recipe', recipe.idMeal]"
-    >
-      <h3>{{ recipe.strMeal }}</h3>
-      <p>{{ recipe.strInstructions }}</p>
+  <ng-template #content>
+    <div *ngIf="userFavorites.length > 0">
+      <h2>Your Favorite Recipes:</h2>
+      <div
+        *ngFor="let recipe of userFavorites"
+        [routerLink]="['/recipe', recipe.idMeal]"
+      >
+        <h3>{{ recipe.strMeal }}</h3>
+        <p>{{ recipe.strInstructions }}</p>
+      </div>
     </div>
-  </div>
-  <div>
-    <button type="button" routerLink="/food-planner">Go to Food Planner</button>
-  </div>
-</ng-template>
+    <div>
+      <button type="button" routerLink="/food-planner">
+        Go to Food Planner
+      </button>
+    </div>
+  </ng-template>
+</div>

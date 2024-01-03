@@ -1,5 +1,9 @@
 @import "normalize.css";
 
+body {
+  background-color: #000;
+}
+
 .background-container {
   background-size: cover;
   background-position: center;
@@ -23,6 +27,15 @@
   &.register {
     background-image: url("./assets/images/top-view-condiments-aromatic-herbs.jpg");
   }
+  &.my-page {
+    background-image: url("./assets/images/food-with-ingredients.jpg");
+  }
+  &.food-planner {
+    background-image: url("./assets/images/crop-plate-with-salad.jpg");
+  }
+  &.about {
+    background-image: url("./assets/images/top-view-condiments-aromatic-herbs.jpg");
+  }
 }
 
 .input__text {
@@ -40,9 +53,9 @@
   border-radius: 10px;
   color: #fff;
   transition: 0.3s;
-  box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
   -webkit-box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
   -moz-box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
+  box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
 
   &:hover {
     cursor: pointer;
