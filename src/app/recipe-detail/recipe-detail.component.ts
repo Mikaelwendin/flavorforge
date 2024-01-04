@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { inOutAnimation } from '../app.animations';
 import { Meal } from '../recipe/recipe.model';
 import { AuthService } from '../services/auth.service';
 import { RecipeService } from '../services/recipe.service';
@@ -11,6 +12,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss'],
+  animations: [inOutAnimation],
 })
 export class RecipeDetailComponent implements OnInit {
   recipeId: string | null | undefined;

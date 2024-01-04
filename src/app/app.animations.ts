@@ -44,3 +44,13 @@ export const recipeAnimation = trigger('recipeAnimation', [
     ),
   ]),
 ]);
+export const inOutAnimation = trigger('inOutAnimation', [
+  transition(':enter', [
+    style({ opacity: 0, maxHeight: '0' }),
+    animate('0.5s ease-out', style({ opacity: 1, maxHeight: '1000px' })),
+  ]),
+  transition(':leave', [
+    style({ opacity: 1, maxHeight: '1000px' }),
+    animate('0.5s ease-in', style({ maxHeight: '0', opacity: 0 })),
+  ]),
+]);

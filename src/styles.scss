@@ -94,6 +94,8 @@ h3,
 h4,
 h5,
 h6 {
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
   color: #ffff;
   font-size: 2rem;
   font-family: $header;
