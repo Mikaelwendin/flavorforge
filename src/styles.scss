@@ -1,5 +1,5 @@
 @import "normalize.css";
-
+@import "./assets/styles/variables.scss";
 body {
   background-color: #000;
 }
@@ -57,6 +57,15 @@ body {
   -moz-box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
   box-shadow: 0px 0px 12px 3px rgba(13, 13, 13, 1);
 
+  &:disabled {
+    border: #2f2f2f;
+    color: #2f2f2f;
+
+    &:hover {
+      background-color: #000;
+    }
+  }
+
   &:hover {
     cursor: pointer;
     background-color: #2f2f2f;
@@ -79,4 +88,17 @@ body {
     &:hover {
     }
   }
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffff;
+  font-size: 2rem;
+  font-family: $header;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  -webkit-user-select: none;
+  user-select: none;
 }

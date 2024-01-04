@@ -1,6 +1,6 @@
 <div class="background-container my-page">
   <div *ngIf="isLoggedIn">
-    <button (click)="logOut()">Logout</button>
+    <button type="button" class="btn" (click)="logOut()">Logout</button>
   </div>
 
   <div *ngIf="loading; else content">
@@ -12,20 +12,48 @@
   </div>
 
   <ng-template #content>
-    <div *ngIf="userFavorites.length > 0">
-      <h2>Your Favorite Recipes:</h2>
-      <div
-        *ngFor="let recipe of userFavorites"
-        [routerLink]="['/recipe', recipe.idMeal]"
-      >
-        <h3>{{ recipe.strMeal }}</h3>
-        <p>{{ recipe.strInstructions }}</p>
+    <div class="favorites__container">
+      <div *ngIf="userFavorites.length > 0">
+        <h2>Your Favorite Recipes:</h2>
+        <div class="favorites__container-overview">
+          <div
+            class="recipe-item"
+            [@recipeAnimation]="currentRecipeIndex"
+            [routerLink]="['/recipe', userFavorites[currentRecipeIndex].idMeal]"
+          >
+            <h3>
+              {{ userFavorites[currentRecipeIndex].strMeal }}
+            </h3>
+            <img
+              [src]="userFavorites[currentRecipeIndex].strMealThumb"
+              alt="{{ userFavorites[currentRecipeIndex].strMeal }}"
+            />
+            <p>{{ userFavorites[currentRecipeIndex].strCategory }}</p>
+            <p>{{ userFavorites[currentRecipeIndex].strArea }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button
+          class="btn"
+          type="button"
+          (click)="prevRecipe()"
+          [disabled]="isAtFirstRecipe()"
+        >
+          Previous
+        </button>
+        <button
+          class="btn"
+          type="button"
+          (click)="nextRecipe()"
+          [disabled]="isAtLastRecipe()"
+        >
+          Next
+        </button>
       </div>
     </div>
-    <div>
-      <button type="button" routerLink="/food-planner">
-        Go to Food Planner
-      </button>
-    </div>
+    <button type="button" class="btn" routerLink="/food-planner">
+      Go to Food Planner
+    </button>
   </ng-template>
 </div>

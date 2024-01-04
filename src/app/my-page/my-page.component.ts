@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { recipeAnimation } from '../app.animations';
 import { Meal } from '../recipe/recipe.model';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
@@ -13,6 +14,7 @@ import { selectUser } from '../user/user.selectors';
   templateUrl: './my-page.component.html',
   styleUrls: ['./my-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
+  animations: [recipeAnimation],
 })
 export class MyPageComponent implements OnInit {
   userFavorites: Meal[] = [];
@@ -20,6 +22,7 @@ export class MyPageComponent implements OnInit {
   userSubscription: Subscription;
   isLoggedIn: boolean = false;
   user: User | null = null;
+  currentRecipeIndex: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -47,12 +50,33 @@ export class MyPageComponent implements OnInit {
     }
     this.loading = false;
   }
+
+  nextRecipe(): void {
+    if (this.currentRecipeIndex < this.userFavorites.length - 1) {
+      this.currentRecipeIndex++;
+    }
+  }
+
+  prevRecipe(): void {
+    if (this.currentRecipeIndex > 0) {
+      this.currentRecipeIndex--;
+    }
+  }
+
   async logOut() {
     await this.authService.logout();
     this.userSubscription.unsubscribe();
     this.navigateToLoginPage();
   }
+
   private navigateToLoginPage() {
     this.router.navigate(['/login']);
+  }
+  isAtFirstRecipe(): boolean {
+    return this.currentRecipeIndex === 0;
+  }
+
+  isAtLastRecipe(): boolean {
+    return this.currentRecipeIndex === this.userFavorites.length - 1;
   }
 }

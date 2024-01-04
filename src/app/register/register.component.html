@@ -1,25 +1,47 @@
 <div class="background-container register">
-  <div>
+  <div class="register__container">
     <h2>Create an account</h2>
     <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
-      <label>Email:</label>
-      <input type="email" [(ngModel)]="email" name="email" required />
-
-      <label>Password:</label>
-      <input type="password" [(ngModel)]="password" name="password" required />
-
-      <label>Confirm Password:</label>
       <input
+        class="input__text"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        title="email"
+        placeholder="E-mail"
+      />
+      <input
+        class="input__text"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        required
+        title="username"
+        placeholder="Username"
+      />
+      <input
+        class="input__text"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        title="password"
+        placeholder="Password"
+      />
+      <input
+        class="input__text"
+        title="confirm password"
         type="password"
         [(ngModel)]="confirmPassword"
         name="confirmPassword"
         required
+        placeholder="Confirm password"
       />
 
-      <label>Username:</label>
-      <input type="text" [(ngModel)]="username" name="username" required />
-
-      <button type="submit" [disabled]="isSubmitting">Register</button>
+      <button class="btn" type="submit" [disabled]="isSubmitting">
+        Register
+      </button>
 
       <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
 
