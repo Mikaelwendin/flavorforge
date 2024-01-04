@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { inOutAnimation } from '../app.animations';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
 import { SearchService } from '../services/search.service';
@@ -8,6 +9,7 @@ import { SearchService } from '../services/search.service';
   selector: 'app-display-recipes',
   templateUrl: './display-recipes.component.html',
   styleUrls: ['./display-recipes.component.scss'],
+  animations: [inOutAnimation],
 })
 export class DisplayRecipesComponent implements OnInit {
   searchQuery: string = '';

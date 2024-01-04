@@ -61,6 +61,7 @@
         <div class="search__container">
           <div
             *ngFor="let recipe of paginatedResults"
+            [@inOutAnimation]
             [routerLink]="['/recipe', recipe.idMeal]"
           >
             <div class="search__container-results">
