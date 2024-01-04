@@ -44,9 +44,10 @@
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         & img {
-          width: 70%;
+          // TODO Something here messes up the nav
+          width: 60%;
           margin: 10px;
           border-radius: 15px;
           transition: 0.5s;

@@ -4,7 +4,6 @@
   @include from-md {
     flex-direction: row;
     justify-content: space-between;
-    height: fit-content;
   }
   position: absolute;
   display: flex;
@@ -19,7 +18,6 @@
     }
     width: 50px;
     padding: 20px;
-    height: fit-content;
     transition: 0.3s ease;
     display: block;
     cursor: pointer;
@@ -58,7 +56,6 @@
   nav {
     @include from-md {
       padding: unset;
-      position: relative;
       width: 100% !important;
     }
     width: 100%;

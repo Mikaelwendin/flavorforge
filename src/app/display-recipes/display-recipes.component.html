@@ -46,15 +46,14 @@
         <option value="Goat">Goat</option>
       </select>
     </div>
-
-    <div *ngIf="loading; else content">
+    <div class="spinner" *ngIf="loading; else content">
       <mat-progress-spinner
+        *ngIf="loading; else content"
         mode="indeterminate"
         diameter="100"
         color="#2196F3"
       ></mat-progress-spinner>
     </div>
-
     <ng-template #content>
       <div *ngIf="searchResults.length > 0">
         <h2 class="header__secondary">Search Results:</h2>

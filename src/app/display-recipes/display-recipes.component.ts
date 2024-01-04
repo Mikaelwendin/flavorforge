@@ -43,9 +43,8 @@ export class DisplayRecipesComponent implements OnInit {
         console.error('Error when fetching random recipe:', error);
       }
     );
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+
+    this.loading = false;
   }
 
   clearSearchResults() {
@@ -71,9 +70,8 @@ export class DisplayRecipesComponent implements OnInit {
           }
         );
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+
+    this.loading = false;
   }
   getMealsByCategory(event: Event): void {
     const category = (event.target as HTMLSelectElement).value;
@@ -89,9 +87,7 @@ export class DisplayRecipesComponent implements OnInit {
         console.error('Error when fetching meals by category:', error);
       },
       () => {
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
+        this.loading = false;
       }
     );
   }
