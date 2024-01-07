@@ -55,8 +55,7 @@
       ></mat-progress-spinner>
     </div>
     <ng-template #content>
-      <div *ngIf="searchResults.length > 0">
-        <h2 class="header__secondary">Search Results:</h2>
+      <div class="searchbox" *ngIf="searchResults.length > 0">
         <div class="search__container">
           <div
             *ngFor="let recipe of paginatedResults"
