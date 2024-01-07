@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { fade } from '../app.animations';
 import { Meal } from '../recipe/recipe.model';
 
 @Component({
   selector: 'app-recipe-modal',
   templateUrl: './recipe-modal.component.html',
   styleUrls: ['./recipe-modal.component.scss'],
+  animations: [fade],
 })
 export class RecipeModalComponent {
   @Input() userFavorites!: Meal[];

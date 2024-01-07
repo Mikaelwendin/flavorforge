@@ -8,21 +8,25 @@
   </div>
 
   <ng-template #content>
-    <div
-      *ngFor="let day of daysOfWeek"
-      class="day-column"
-      [ngClass]="{ 'current-day': isCurrentDay(day) }"
-    >
-      <div class="day-header" (click)="openRecipeSelectorModal(day)">
-        {{ day }}
-        <div *ngIf="plannedWeek[day]">
-          <h3 (click)="toggleRecipe(day)">{{ plannedWeek[day].strMeal }}</h3>
-          <div *ngIf="isExpanded(day)">
-            <ul>
-              <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
-                {{ ingredient }}
-              </li>
-            </ul>
+    <div class="planner-container">
+      <div
+        *ngFor="let day of daysOfWeek"
+        class="day-column"
+        [ngClass]="{ 'current-day': isCurrentDay(day) }"
+      >
+        <div class="day-header" (click)="openRecipeSelectorModal(day)">
+          {{ day }}
+          <div *ngIf="plannedWeek[day]">
+            <h3 (click)="toggleRecipe(day); $event.stopPropagation()">
+              {{ plannedWeek[day].strMeal }}
+            </h3>
+            <div *ngIf="isExpanded(day)">
+              <ul>
+                <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
+                  {{ ingredient }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

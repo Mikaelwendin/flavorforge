@@ -69,7 +69,6 @@ export class FoodPlannerComponent implements OnInit {
 
   assignRecipe(day: string, recipe: Meal): void {
     this.plannedWeek[day] = { ...recipe };
-    console.log(day);
   }
 
   updatePlannedWeekInDatabase(): void {
@@ -79,7 +78,7 @@ export class FoodPlannerComponent implements OnInit {
         .updateUser(user.uid, { plannedWeek: this.plannedWeek })
         .then(() => {
           console.log('User updated:', this.plannedWeek);
-          this.recipeModal.show();
+          //this.recipeModal.show();
         })
         .catch((error) => {
           console.error('Error updating user:', error);
