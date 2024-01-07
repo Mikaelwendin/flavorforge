@@ -1,9 +1,13 @@
 <div *ngIf="showModal" class="modal" [@fade]>
   <div class="modal-content">
     <h2>Select a Recipe</h2>
-    <div *ngFor="let recipe of userFavorites" (click)="selectRecipe(recipe)">
-      {{ recipe.strMeal }}
+    <div
+      class="modal-recipe"
+      *ngFor="let recipe of userFavorites"
+      (click)="selectRecipe(recipe)"
+    >
+      <h3 class="modal-header">{{ recipe.strMeal }}</h3>
     </div>
-    <button type="button" (click)="hide()">Close</button>
+    <button type="button" class="btn" (click)="hide()">Close</button>
   </div>
 </div>

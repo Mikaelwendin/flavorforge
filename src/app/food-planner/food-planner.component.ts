@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
+import { inOutAnimation } from '../app.animations';
 import { RecipeModalComponent } from '../recipe-modal/recipe-modal.component';
 import { Meal } from '../recipe/recipe.model';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +10,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-food-planner',
   templateUrl: './food-planner.component.html',
   styleUrls: ['./food-planner.component.scss'],
+  animations: [inOutAnimation],
 })
 export class FoodPlannerComponent implements OnInit {
   userFavorites: Meal[] = [];

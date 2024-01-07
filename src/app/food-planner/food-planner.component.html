@@ -14,13 +14,17 @@
         class="day-column"
         [ngClass]="{ 'current-day': isCurrentDay(day) }"
       >
-        <div class="day-header" (click)="openRecipeSelectorModal(day)">
-          {{ day }}
+        <div class="day-header">
+          <h2 (click)="openRecipeSelectorModal(day)">{{ day }}</h2>
           <div *ngIf="plannedWeek[day]">
-            <h3 (click)="toggleRecipe(day); $event.stopPropagation()">
+            <p (click)="toggleRecipe(day); $event.stopPropagation()">
               {{ plannedWeek[day].strMeal }}
-            </h3>
-            <div *ngIf="isExpanded(day)">
+            </p>
+            <div
+              class="expanded-recipe"
+              [@inOutAnimation]
+              *ngIf="isExpanded(day)"
+            >
               <ul>
                 <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
                   {{ ingredient }}
