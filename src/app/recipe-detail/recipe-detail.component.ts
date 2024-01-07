@@ -19,6 +19,7 @@ export class RecipeDetailComponent implements OnInit {
   meal: Meal | undefined;
   showIngredients: boolean = false;
   showInstructions: boolean = false;
+  isRecipeInFavorites: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
@@ -51,14 +52,12 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Meal details:', this.meal);
-
     this.route.params.subscribe((params) => {
       const recipeId = params['id'];
-      console.log('Recipe ID:', recipeId);
       this.recipeService.getRecipeById(recipeId).subscribe(
         (details) => {
           this.meal = details.meals[0];
+          this.checkRecipeInFavorites();
         },
         (error) => {
           console.error('Error fetching recipe details:', error);
@@ -66,14 +65,27 @@ export class RecipeDetailComponent implements OnInit {
       );
     });
   }
+  checkRecipeInFavorites(): void {
+    if (this.meal && this.isUserLoggedIn()) {
+      const currentUser = this.authService.getCurrentUser();
+      if (currentUser) {
+        this.userService
+          .isRecipeInFavorites(currentUser.uid, this.meal)
+          .subscribe((isInFavorites) => {
+            this.isRecipeInFavorites = isInFavorites;
+          });
+      }
+    }
+  }
   goBack(): void {
     this.location.back();
   }
   addToFavorites(): void {
-    if (this.meal && this.isUserLoggedIn()) {
+    if (this.meal && this.isUserLoggedIn() && !this.isRecipeInFavorites) {
       const currentUser = this.authService.getCurrentUser();
       if (currentUser) {
         this.userService.addToFavorites(currentUser.uid, this.meal);
+        this.isRecipeInFavorites = true;
       }
     }
   }

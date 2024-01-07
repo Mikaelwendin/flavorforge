@@ -13,23 +13,12 @@
     <p *ngIf="showInstructions" [@inOutAnimation]>
       {{ meal?.strInstructions }}
     </p>
-
-    <!-- <div *ngIf="meal?.strYoutube" class="video-container">
-    <iframe
-      title="Video"
-      width="560"
-      height="315"                                                            // FIX IFRAME BUG
-      [src]="getVideoEmbedUrl(meal?.strYoutube)"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div> -->
-
     <button
       class="btn"
       type="button"
       *ngIf="isUserLoggedIn()"
       (click)="addToFavorites()"
+      [disabled]="isRecipeInFavorites"
     >
       Add to Favorites
     </button>
