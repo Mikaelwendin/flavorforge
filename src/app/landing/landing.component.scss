@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 8rem;
 
   & .landing__logo {
     color: #ffff;
@@ -13,5 +15,7 @@
     text-transform: uppercase;
     -webkit-user-select: none;
     user-select: none;
+    & .btn {
+    }
   }
 }

@@ -4,26 +4,60 @@
 .background-container.recipes {
   padding: 10rem;
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
+  @include from-md {
+    justify-content: flex-start;
+  }
+  & h2 {
+    text-align: center;
+  }
   .recipe__container {
-    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include from-md {
+      justify-content: center;
+    }
+    width: 100%;
     gap: 2rem;
+    & .pagination-box {
+      @include from-md {
+        flex-direction: row;
+      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
     &-category {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       gap: 0.5rem;
+      justify-content: center;
     }
 
     & .searchForm {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
       & .searchForm-btns {
+        @include from-md {
+          flex-direction: row;
+        }
+        display: flex; //new
+        flex-direction: column; //new
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
         margin-top: 1rem;
+        width: 100%;
       }
     }
 
@@ -40,17 +74,25 @@
     .search__container {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
 
       .search__container-results {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
+
+        @include from-md {
+          justify-content: flex-start;
+        }
         height: auto;
         width: 100%;
         & img {
-          width: 50%;
+          @include from-md {
+            width: 50%;
+          }
+          width: 80%;
           margin: 10px;
           border-radius: 15px;
           transition: 0.5s;
