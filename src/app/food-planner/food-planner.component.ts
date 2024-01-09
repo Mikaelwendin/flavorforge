@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
 import { inOutAnimation } from '../app.animations';
@@ -36,7 +37,8 @@ export class FoodPlannerComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +82,6 @@ export class FoodPlannerComponent implements OnInit {
         .updateUser(user.uid, { plannedWeek: this.plannedWeek })
         .then(() => {
           console.log('User updated:', this.plannedWeek);
-          //this.recipeModal.show();
         })
         .catch((error) => {
           console.error('Error updating user:', error);
@@ -118,5 +119,8 @@ export class FoodPlannerComponent implements OnInit {
     this.currentDay = today.toLowerCase();
     console.log(this.currentDay);
     this.cdr.detectChanges();
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

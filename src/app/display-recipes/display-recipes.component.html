@@ -58,6 +58,7 @@
       <div class="searchbox" *ngIf="searchResults.length > 0">
         <div class="search__container">
           <div
+            class="search__container-divider"
             *ngFor="let recipe of paginatedResults"
             [@inOutAnimation]
             [routerLink]="['/recipe', recipe.idMeal]"

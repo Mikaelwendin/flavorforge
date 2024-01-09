@@ -1,6 +1,8 @@
 <div class="background-container my-page">
   <div *ngIf="isLoggedIn">
-    <button type="button" class="btn" (click)="logOut()">Logout</button>
+    <button type="button" class="btn" id="logout" (click)="logOut()">
+      Logout
+    </button>
   </div>
 
   <div *ngIf="loading; else content">
@@ -33,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="button-container">
         <button
           class="btn"
           type="button"

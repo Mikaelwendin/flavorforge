@@ -2,10 +2,11 @@
 @import "/src/assets/styles/mixins.scss";
 
 .background-container.recipes {
-  padding: 10rem;
+  padding-top: 20vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  width: 100%;
   @include from-md {
     justify-content: flex-start;
   }
@@ -25,6 +26,7 @@
     & .pagination-box {
       @include from-md {
         flex-direction: row;
+        width: 50%;
       }
       display: flex;
       flex-direction: column;
@@ -51,8 +53,8 @@
         @include from-md {
           flex-direction: row;
         }
-        display: flex; //new
-        flex-direction: column; //new
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
@@ -76,6 +78,12 @@
       flex-wrap: wrap;
       justify-content: center;
 
+      &-divider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .search__container-results {
         display: flex;
         flex-direction: column;
@@ -87,12 +95,12 @@
           justify-content: flex-start;
         }
         height: auto;
-        width: 100%;
+        width: 80%;
         & img {
           @include from-md {
             width: 50%;
           }
-          width: 80%;
+          width: 60%;
           margin: 10px;
           border-radius: 15px;
           transition: 0.5s;
@@ -130,4 +138,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
 }
