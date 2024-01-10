@@ -1,3 +1,4 @@
+@import "/src/assets/styles/mixins.scss";
 .register__container {
   display: flex;
   flex-direction: column;
@@ -11,5 +12,8 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
+    @include from-md {
+      width: 40%;
+    }
   }
 }
