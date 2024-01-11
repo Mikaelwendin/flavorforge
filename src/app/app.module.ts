@@ -23,6 +23,7 @@ import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
 import { RegisterComponent } from './register/register.component';
 import { UserEffects } from './user/user.effects';
 import { userReducer } from './user/user.reducer';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { userReducer } from './user/user.reducer';
     DisplayRecipesComponent,
     RecipeModalComponent,
     FoodPlannerComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,21 +13,39 @@ export class RegisterComponent {
   password: string = '';
   username: string = '';
   confirmPassword: string = '';
+  gdprAgreed: boolean = false;
 
   registrationSuccess = false;
   registrationError = false;
   registrationErrorMessage: string | null = null;
   isSubmitting = false;
+  passwordMismatchError: string | null = null;
+  invalidEmailError: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    this.resetErrors();
+  }
+  resetErrors() {
+    this.passwordMismatchError = null;
+    this.invalidEmailError = null;
+  }
+
   async register() {
-    if (this.isSubmitting) {
+    this.resetErrors();
+
+    if (this.isSubmitting || !this.gdprAgreed) {
       return;
     }
 
     if (this.password !== this.confirmPassword) {
-      console.log('Passwords do not match');
+      this.passwordMismatchError = 'Passwords do not match';
+      return;
+    }
+
+    if (!this.isValidEmail(this.email)) {
+      this.invalidEmailError = 'Please enter a valid email address.';
       return;
     }
 
@@ -49,11 +67,27 @@ export class RegisterComponent {
     } finally {
       this.isSubmitting = false;
     }
-    setTimeout(() => {
-      this.navigateToLandingPage();
-    }, 1000);
+
+    if (this.registrationSuccess) {
+      setTimeout(() => {
+        this.navigateToLandingPage();
+      }, 1000);
+    }
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
   private navigateToLandingPage() {
     this.router.navigate(['/landing']);
+  }
+  areFieldsFilled(): boolean {
+    return (
+      !!this.email &&
+      !!this.username &&
+      !!this.password &&
+      !!this.confirmPassword
+    );
   }
 }

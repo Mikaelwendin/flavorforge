@@ -39,9 +39,37 @@
         placeholder="Confirm password"
       />
 
-      <button class="btn" type="submit" [disabled]="isSubmitting">
+      <div class="gdpr-agreement">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="gdprAgreed"
+            name="gdprAgreement"
+            required
+          />
+          I agree to the GDPR terms
+        </label>
+      </div>
+
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="isSubmitting || !gdprAgreed || !areFieldsFilled()"
+      >
         Register
       </button>
+
+      <div class="gdpr-text">
+        By registering, you agree to our GDPR terms. These include the handling
+        of your personal data in accordance with our privacy policy.
+      </div>
+      <div *ngIf="passwordMismatchError" class="error-message">
+        {{ passwordMismatchError }}
+      </div>
+
+      <div *ngIf="invalidEmailError" class="error-message">
+        {{ invalidEmailError }}
+      </div>
 
       <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
 

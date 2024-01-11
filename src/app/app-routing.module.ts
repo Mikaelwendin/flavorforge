@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { DisplayRecipesComponent } from './display-recipes/display-recipes.component';
 import { FoodPlannerComponent } from './food-planner/food-planner.component';
 import { LandingComponent } from './landing/landing.component';
@@ -42,6 +43,11 @@ const routes: Routes = [
     component: MyPageComponent,
     canActivate: [AuthGuard],
     data: { animation: 'my-page' },
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: { animation: 'about' },
   },
 ];
 
