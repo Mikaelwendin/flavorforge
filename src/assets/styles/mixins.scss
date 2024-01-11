@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+@mixin from-xs {
+  @media (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+@mixin from-sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+@mixin from-md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+@mixin from-lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}

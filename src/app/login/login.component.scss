@@ -1,0 +1,33 @@
+@import "/src/assets/styles/variables.scss";
+@import "/src/assets/styles/mixins.scss";
+.login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    @include from-md {
+      width: 40%;
+    }
+  }
+  h3 {
+    margin-top: 1rem;
+  }
+
+  a {
+    color: #fff;
+    font-size: 1.5rem;
+
+    &:visited {
+      color: #fff;
+    }
+  }
+}

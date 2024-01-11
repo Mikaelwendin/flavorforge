@@ -1,66 +1,88 @@
-<div>
-  <h1>FlavorForge</h1>
-  <form (submit)="searchRecipes()">
-    <input
-      type="text"
-      [(ngModel)]="searchQuery"
-      placeholder="Search for recipes"
-      name="search"
-    />
-    <button type="submit">Search</button>
-    <button (click)="getRandomRecipe()" type="button">Random recipe!</button>
-  </form>
-  <button (click)="clearSearchResults()">Clear Search</button>
-  <div>
-    <h2>Search by Category:</h2>
-    <button (click)="getMealsByCategory('Beef')">Beef</button>
-    <button (click)="getMealsByCategory('Chicken')">Chicken</button>
-    <button (click)="getMealsByCategory('Dessert')">Dessert</button>
-    <button (click)="getMealsByCategory('Lamb')">Lamb</button>
-    <button (click)="getMealsByCategory('Miscellaneous')">Miscellaneous</button>
-    <button (click)="getMealsByCategory('Pasta')">Pasta</button>
-    <button (click)="getMealsByCategory('Pork')">Pork</button>
-    <button (click)="getMealsByCategory('Seafood')">Seafood</button>
-    <button (click)="getMealsByCategory('Side')">Side</button>
-    <button (click)="getMealsByCategory('Starter')">Starter</button>
-    <button (click)="getMealsByCategory('Vegan')">Vegan</button>
-    <button (click)="getMealsByCategory('Vegetarian')">Vegetarian</button>
-    <button (click)="getMealsByCategory('Breakfast')">Breakfast</button>
-    <button (click)="getMealsByCategory('Goat')">Goat</button>
-  </div>
-
-  <div *ngIf="loading; else content">
-    <mat-progress-spinner
-      mode="indeterminate"
-      diameter="100"
-      color="#2196F3"
-    ></mat-progress-spinner>
-  </div>
-
-  <ng-template #content>
-    <div *ngIf="searchResults.length > 0">
-      <h2>Search Results:</h2>
-      <div>
-        <div
-          *ngFor="let recipe of paginatedResults"
-          [routerLink]="['/recipe', recipe.idMeal]"
-        >
-          <div>
-            <h3>{{ recipe.strMeal }}</h3>
-            <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
-            <p>{{ recipe.strCategory }}</p>
-            <p>{{ recipe.strArea }}</p>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="searchResults.length > itemsPerPage">
+<div class="background-container recipes">
+  <div class="recipe__container">
+    <form class="searchForm" (submit)="searchRecipes()">
+      <input
+        class="input__text"
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search for recipes"
+        name="search"
+      />
+      <div class="searchForm-btns">
+        <button class="btn btn__main" type="submit">Search</button>
+        <button class="btn btn__main" (click)="getRandomRecipe()" type="button">
+          Random
+        </button>
         <button
-          *ngFor="let page of getPageArray()"
-          (click)="onPageChange(page)"
+          class="btn btn__secondary"
+          type="button"
+          (click)="clearSearchResults()"
         >
-          {{ page }}
+          Clear Search
         </button>
       </div>
+    </form>
+    <div class="recipe__container-category">
+      <h2 class="header__secondary">Search by Category</h2>
+      <select
+        title="category-select"
+        class="btn btn__select"
+        (change)="getMealsByCategory($event)"
+      >
+        <option value="" disabled selected>Select an option</option>
+        <option value="Beef">Beef</option>
+        <option value="Chicken">Chicken</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Lamb">Lamb</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+        <option value="Pasta">Pasta</option>
+        <option value="Pork">Pork</option>
+        <option value="Seafood">Seafood</option>
+        <option value="Side">Side</option>
+        <option value="Starter">Starter</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Goat">Goat</option>
+      </select>
     </div>
-  </ng-template>
+    <div class="spinner" *ngIf="loading; else content">
+      <mat-progress-spinner
+        *ngIf="loading; else content"
+        mode="indeterminate"
+        diameter="100"
+        color="#2196F3"
+      ></mat-progress-spinner>
+    </div>
+    <ng-template #content>
+      <div class="searchbox" *ngIf="searchResults.length > 0">
+        <div class="search__container">
+          <div
+            class="search__container-divider"
+            *ngFor="let recipe of paginatedResults"
+            [@inOutAnimation]
+            [routerLink]="['/recipe', recipe.idMeal]"
+          >
+            <div class="search__container-results">
+              <h3>{{ recipe.strMeal }}</h3>
+              <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}" />
+              <p>{{ recipe.strCategory }}</p>
+              <p>{{ recipe.strArea }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="pagination-box" *ngIf="searchResults.length > itemsPerPage">
+          <button
+            class="btn btn__secondary"
+            type="button"
+            *ngFor="let page of getPageArray()"
+            (click)="onPageChange(page)"
+            [ngClass]="{ 'active-page': page === currentPage }"
+          >
+            {{ page }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>

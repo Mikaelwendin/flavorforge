@@ -1,32 +1,84 @@
-<div>
-  <h2>Create an account</h2>
-  <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+<div class="background-container register">
+  <div class="register__container">
+    <h2>Create an account</h2>
+    <form (ngSubmit)="register()" [ngClass]="{ disabled: isSubmitting }">
+      <input
+        class="input__text"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        title="email"
+        placeholder="E-mail"
+      />
+      <input
+        class="input__text"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        required
+        title="username"
+        placeholder="Username"
+      />
+      <input
+        class="input__text"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        title="password"
+        placeholder="Password"
+      />
+      <input
+        class="input__text"
+        title="confirm password"
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        required
+        placeholder="Confirm password"
+      />
 
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
+      <div class="gdpr-agreement">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="gdprAgreed"
+            name="gdprAgreement"
+            required
+          />
+          I agree to the GDPR terms
+        </label>
+      </div>
 
-    <label>Confirm Password:</label>
-    <input
-      type="password"
-      [(ngModel)]="confirmPassword"
-      name="confirmPassword"
-      required
-    />
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="isSubmitting || !gdprAgreed || !areFieldsFilled()"
+      >
+        Register
+      </button>
 
-    <label>Username:</label>
-    <input type="text" [(ngModel)]="username" name="username" required />
+      <div class="gdpr-text">
+        By registering, you agree to our GDPR terms. These include the handling
+        of your personal data in accordance with our privacy policy.
+      </div>
+      <div *ngIf="passwordMismatchError" class="error-message">
+        {{ passwordMismatchError }}
+      </div>
 
-    <button type="submit" [disabled]="isSubmitting">Register</button>
+      <div *ngIf="invalidEmailError" class="error-message">
+        {{ invalidEmailError }}
+      </div>
 
-    <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
+      <mat-spinner *ngIf="isSubmitting" diameter="30"></mat-spinner>
 
-    <div *ngIf="registrationSuccess" class="success-message">
-      Registration successful! Redirecting...
-    </div>
-    <div *ngIf="registrationError" class="error-message">
-      Registration failed: {{ registrationErrorMessage }}
-    </div>
-  </form>
+      <div *ngIf="registrationSuccess" class="success-message">
+        Registration successful! Redirecting...
+      </div>
+      <div *ngIf="registrationError" class="error-message">
+        Registration failed: {{ registrationErrorMessage }}
+      </div>
+    </form>
+  </div>
 </div>

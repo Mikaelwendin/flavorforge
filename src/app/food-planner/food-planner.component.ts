@@ -1,5 +1,7 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
+import { inOutAnimation } from '../app.animations';
 import { RecipeModalComponent } from '../recipe-modal/recipe-modal.component';
 import { Meal } from '../recipe/recipe.model';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +11,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-food-planner',
   templateUrl: './food-planner.component.html',
   styleUrls: ['./food-planner.component.scss'],
+  animations: [inOutAnimation],
 })
 export class FoodPlannerComponent implements OnInit {
   userFavorites: Meal[] = [];
@@ -34,7 +37,8 @@ export class FoodPlannerComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -47,9 +51,7 @@ export class FoodPlannerComponent implements OnInit {
       });
     }
     this.updateCurrentDay();
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+    this.loading = false;
   }
 
   openRecipeSelectorModal(day: string): void {
@@ -71,7 +73,6 @@ export class FoodPlannerComponent implements OnInit {
 
   assignRecipe(day: string, recipe: Meal): void {
     this.plannedWeek[day] = { ...recipe };
-    console.log(day);
   }
 
   updatePlannedWeekInDatabase(): void {
@@ -81,7 +82,6 @@ export class FoodPlannerComponent implements OnInit {
         .updateUser(user.uid, { plannedWeek: this.plannedWeek })
         .then(() => {
           console.log('User updated:', this.plannedWeek);
-          this.recipeModal.show();
         })
         .catch((error) => {
           console.error('Error updating user:', error);
@@ -119,5 +119,8 @@ export class FoodPlannerComponent implements OnInit {
     this.currentDay = today.toLowerCase();
     console.log(this.currentDay);
     this.cdr.detectChanges();
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

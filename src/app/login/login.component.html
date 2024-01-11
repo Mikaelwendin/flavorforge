@@ -1,24 +1,43 @@
-<div *ngIf="!isLoggedIn">
-  <h2>Login to FlavorForge</h2>
-  <form (ngSubmit)="login()" #loginForm="ngForm">
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+<div class="background-container login">
+  <div class="login__container" *ngIf="!isLoggedIn">
+    <h2>Login to FlavorForge</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <input
+        placeholder="E-mail"
+        class="input__text"
+        title="email"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+      <input
+        placeholder="Password"
+        class="input__text"
+        title="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
 
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="loginForm.invalid || isLoggingIn"
+      >
+        {{ isLoggingIn ? "Logging in..." : "Login" }}
+      </button>
 
-    <button type="submit" [disabled]="loginForm.invalid || isLoggingIn">
-      {{ isLoggingIn ? "Logging in..." : "Login" }}
-    </button>
+      <div *ngIf="loginError" class="error-message">
+        {{ loginError }}
+      </div>
+    </form>
+    <h3>Not a member?</h3>
+    <a routerLink="/register">Register</a>
+  </div>
 
-    <div *ngIf="loginError" class="error-message">
-      {{ loginError }}
-    </div>
-  </form>
-  <h3>Not a member?</h3>
-  <a routerLink="/register">Register</a>
-</div>
-
-<div *ngIf="isLoggedIn">
-  <button (click)="logOut()">Logout</button>
+  <div *ngIf="isLoggedIn">
+    <button (click)="logOut()">Logout</button>
+  </div>
 </div>

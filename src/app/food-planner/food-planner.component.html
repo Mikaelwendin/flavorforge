@@ -1,34 +1,45 @@
-<div *ngIf="loading; else content">
-  <mat-progress-spinner
-    mode="indeterminate"
-    diameter="100"
-    color="#2196F3"
-  ></mat-progress-spinner>
-</div>
+<div class="background-container food-planner">
+  <button type="button" class="btn" (click)="goBack()">Back</button>
+  <div *ngIf="loading; else content">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="100"
+      color="#2196F3"
+    ></mat-progress-spinner>
+  </div>
 
-<ng-template #content>
-  <div
-    *ngFor="let day of daysOfWeek"
-    class="day-column"
-    [ngClass]="{ 'current-day': isCurrentDay(day) }"
-  >
-    <div class="day-header" (click)="openRecipeSelectorModal(day)">
-      {{ day }}
-      <div *ngIf="plannedWeek[day]">
-        <h3 (click)="toggleRecipe(day)">{{ plannedWeek[day].strMeal }}</h3>
-        <div *ngIf="isExpanded(day)">
-          <ul>
-            <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
-              {{ ingredient }}
-            </li>
-          </ul>
+  <ng-template #content>
+    <div class="planner-container">
+      <div
+        *ngFor="let day of daysOfWeek"
+        class="day-column"
+        [ngClass]="{ 'current-day': isCurrentDay(day) }"
+      >
+        <div class="day-header">
+          <h2 (click)="openRecipeSelectorModal(day)">{{ day }}</h2>
+          <div *ngIf="plannedWeek[day]">
+            <p (click)="toggleRecipe(day); $event.stopPropagation()">
+              {{ plannedWeek[day].strMeal }}
+            </p>
+            <div
+              class="expanded-recipe"
+              [@inOutAnimation]
+              *ngIf="isExpanded(day)"
+            >
+              <ul>
+                <li *ngFor="let ingredient of getIngredients(plannedWeek[day])">
+                  {{ ingredient }}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <app-recipe-modal
-    #recipeModal
-    [userFavorites]="userFavorites"
-  ></app-recipe-modal>
-</ng-template>
+    <app-recipe-modal
+      #recipeModal
+      [userFavorites]="userFavorites"
+    ></app-recipe-modal>
+  </ng-template>
+</div>

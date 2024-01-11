@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { inOutAnimation } from '../app.animations';
 import { Meal } from '../recipe/recipe.model';
 import { RecipeService } from '../services/recipe.service';
 import { SearchService } from '../services/search.service';
@@ -8,6 +9,7 @@ import { SearchService } from '../services/search.service';
   selector: 'app-display-recipes',
   templateUrl: './display-recipes.component.html',
   styleUrls: ['./display-recipes.component.scss'],
+  animations: [inOutAnimation],
 })
 export class DisplayRecipesComponent implements OnInit {
   searchQuery: string = '';
@@ -41,9 +43,8 @@ export class DisplayRecipesComponent implements OnInit {
         console.error('Error when fetching random recipe:', error);
       }
     );
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+
+    this.loading = false;
   }
 
   clearSearchResults() {
@@ -69,11 +70,11 @@ export class DisplayRecipesComponent implements OnInit {
           }
         );
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+
+    this.loading = false;
   }
-  getMealsByCategory(category: string): void {
+  getMealsByCategory(event: Event): void {
+    const category = (event.target as HTMLSelectElement).value;
     this.loading = true;
     this.currentPage = 1;
     this.recipeService.getMealsByCategory(category).subscribe(
@@ -84,11 +85,11 @@ export class DisplayRecipesComponent implements OnInit {
       },
       (error) => {
         console.error('Error when fetching meals by category:', error);
+      },
+      () => {
+        this.loading = false;
       }
     );
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
   }
 
   get paginatedResults(): Meal[] {
@@ -99,6 +100,7 @@ export class DisplayRecipesComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.currentPage = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   getPageArray(): number[] {
     const pageCount = Math.ceil(this.searchResults.length / this.itemsPerPage);

@@ -1,0 +1,67 @@
+@import "/src/assets/styles/mixins.scss";
+.my-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  position: relative;
+  gap: 2rem;
+
+  #logout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 2rem;
+  }
+
+  .favorites__container {
+    @include from-md {
+      width: 50vw;
+    }
+
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px;
+    -webkit-backdrop-filter: blur(5.2px);
+    backdrop-filter: blur(5.2px);
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+
+    & .favorites__container-overview {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: rgba(42, 42, 42, 0.5);
+      }
+      & .recipe-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        & p {
+          color: #cccccc;
+          font-size: 1rem;
+        }
+        img {
+          width: 100px;
+        }
+      }
+    }
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,27 +1,61 @@
-<div *ngIf="isLoggedIn">
-  <button (click)="logOut()">Logout</button>
-</div>
+<div class="background-container my-page">
+  <div *ngIf="isLoggedIn">
+    <button type="button" class="btn" id="logout" (click)="logOut()">
+      Logout
+    </button>
+  </div>
 
-<div *ngIf="loading; else content">
-  <mat-progress-spinner
-    mode="indeterminate"
-    diameter="100"
-    color="#2196F3"
-  ></mat-progress-spinner>
-</div>
+  <div *ngIf="loading; else content">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="100"
+      color="#2196F3"
+    ></mat-progress-spinner>
+  </div>
 
-<ng-template #content>
-  <div *ngIf="userFavorites.length > 0">
-    <h2>Your Favorite Recipes:</h2>
-    <div
-      *ngFor="let recipe of userFavorites"
-      [routerLink]="['/recipe', recipe.idMeal]"
-    >
-      <h3>{{ recipe.strMeal }}</h3>
-      <p>{{ recipe.strInstructions }}</p>
+  <ng-template #content>
+    <div class="favorites__container">
+      <div *ngIf="userFavorites.length > 0">
+        <h2>Your Favorite Recipes:</h2>
+        <div class="favorites__container-overview">
+          <div
+            class="recipe-item"
+            [@recipeAnimation]="currentRecipeIndex"
+            [routerLink]="['/recipe', userFavorites[currentRecipeIndex].idMeal]"
+          >
+            <h3>
+              {{ userFavorites[currentRecipeIndex].strMeal }}
+            </h3>
+            <img
+              [src]="userFavorites[currentRecipeIndex].strMealThumb"
+              alt="{{ userFavorites[currentRecipeIndex].strMeal }}"
+            />
+            <p>{{ userFavorites[currentRecipeIndex].strCategory }}</p>
+            <p>{{ userFavorites[currentRecipeIndex].strArea }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button
+          class="btn"
+          type="button"
+          (click)="prevRecipe()"
+          [disabled]="isAtFirstRecipe()"
+        >
+          Previous
+        </button>
+        <button
+          class="btn"
+          type="button"
+          (click)="nextRecipe()"
+          [disabled]="isAtLastRecipe()"
+        >
+          Next
+        </button>
+      </div>
     </div>
-  </div>
-  <div>
-    <button type="button" routerLink="/food-planner">Go to Food Planner</button>
-  </div>
-</ng-template>
+    <button type="button" class="btn" routerLink="/food-planner">
+      Go to Food Planner
+    </button>
+  </ng-template>
+</div>

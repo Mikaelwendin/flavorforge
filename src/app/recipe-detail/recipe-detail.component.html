@@ -1,32 +1,26 @@
-<div>
-  <button type="button" (click)="goBack()">Back</button>
-  <h2>{{ meal?.strMeal }}</h2>
-  <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
-  <button type="button" (click)="toggleIngredients()">
-    Toggle Ingredients
-  </button>
-  <ul *ngIf="showIngredients">
-    <li *ngFor="let ingredient of getIngredientsArray(meal)">
-      {{ ingredient }}
-    </li>
-  </ul>
-  <button type="button" (click)="toggleInstructions()">
-    Toggle Instructions
-  </button>
-  <p *ngIf="showInstructions">{{ meal?.strInstructions }}</p>
-
-  <!-- <div *ngIf="meal?.strYoutube" class="video-container">
-    <iframe
-      title="Video"
-      width="560"
-      height="315"                                                            // FIX IFRAME BUG
-      [src]="getVideoEmbedUrl(meal?.strYoutube)"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div> -->
-
-  <button type="button" *ngIf="isUserLoggedIn()" (click)="addToFavorites()">
-    Add to Favorites
-  </button>
+<div class="background-container details">
+  <div class="details__container">
+    <button type="button" class="btn" (click)="goBack()">Back</button>
+    <h2>{{ meal?.strMeal }}</h2>
+    <img [src]="meal?.strMealThumb" alt="{{ meal?.strMeal }}" />
+    <h3 class="toggle" (click)="toggleIngredients()">Ingredients</h3>
+    <ul *ngIf="showIngredients" [@inOutAnimation]>
+      <li *ngFor="let ingredient of getIngredientsArray(meal)">
+        {{ ingredient }}
+      </li>
+    </ul>
+    <h3 class="toggle" (click)="toggleInstructions()">Instructions</h3>
+    <p *ngIf="showInstructions" [@inOutAnimation]>
+      {{ meal?.strInstructions }}
+    </p>
+    <button
+      class="btn"
+      type="button"
+      *ngIf="isUserLoggedIn()"
+      (click)="addToFavorites()"
+      [disabled]="isRecipeInFavorites"
+    >
+      Add to Favorites
+    </button>
+  </div>
 </div>

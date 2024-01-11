@@ -1,0 +1,32 @@
+@import "/src/assets/styles/mixins.scss";
+.background-container.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & .about {
+    gap: 2rem;
+    margin: 20vh 0 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    width: 80%;
+    border-radius: 8px;
+    backdrop-filter: blur(5.2px);
+    -webkit-backdrop-filter: blur(5.2px);
+    font-size: 1rem;
+
+    & h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      @include from-md {
+        font-size: 3rem;
+      }
+    }
+    @include from-md {
+      width: 60%;
+      padding: 5rem;
+    }
+  }
+}
