@@ -7,10 +7,22 @@
   <nav [ngClass]="{ show__menu: showMenu }">
     <ul>
       <li>
-        <a class="nav__links" (click)="menuOnClick()" routerLink="/">Home</a>
+        <a
+          class="nav__links"
+          (click)="menuOnClick()"
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
       </li>
       <li>
-        <a class="nav__links" (click)="menuOnClick()" routerLink="/recipe"
+        <a
+          class="nav__links"
+          (click)="menuOnClick()"
+          routerLink="/recipe"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
           >Recipes</a
         >
       </li>
@@ -19,16 +31,22 @@
           class="nav__links"
           (click)="menuOnClick()"
           [routerLink]="isLoggedIn ? 'my-page' : 'login'"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           {{ isLoggedIn ? "My page" : "Login" }}
         </a>
       </li>
       <li>
-        <a class="nav__links" (click)="menuOnClick()" routerLink="/">About</a>
+        <a
+          class="nav__links"
+          (click)="menuOnClick()"
+          routerLink="/about"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >About</a
+        >
       </li>
     </ul>
-    <!-- <h3 *ngIf="isLoggedIn">{{ "Logged in" }}</h3> -->
   </nav>
 </div>
-
-<!-- TODO: Lets make my-page into login when not logged in.  -->

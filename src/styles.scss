@@ -48,6 +48,9 @@ body {
   border-radius: 10px;
   width: 100%;
 }
+a:visited {
+  color: currentColor;
+}
 
 .btn {
   @include from-sm {
