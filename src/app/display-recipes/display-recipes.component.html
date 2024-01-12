@@ -55,6 +55,25 @@
       ></mat-progress-spinner>
     </div>
     <ng-template #content>
+      <div class="pagination-box" *ngIf="searchResults.length > itemsPerPage">
+        <button
+          class="btn btn__secondary"
+          type="button"
+          (click)="onPageChange(currentPage - 1)"
+          [disabled]="currentPage === 1"
+        >
+          Previous
+        </button>
+
+        <button
+          class="btn btn__secondary"
+          type="button"
+          (click)="onPageChange(currentPage + 1)"
+          [disabled]="currentPage === getPageArray().length"
+        >
+          Next
+        </button>
+      </div>
       <div class="searchbox" *ngIf="searchResults.length > 0">
         <div class="search__container">
           <div
@@ -75,11 +94,19 @@
           <button
             class="btn btn__secondary"
             type="button"
-            *ngFor="let page of getPageArray()"
-            (click)="onPageChange(page)"
-            [ngClass]="{ 'active-page': page === currentPage }"
+            (click)="onPageChange(currentPage - 1)"
+            [disabled]="currentPage === 1"
           >
-            {{ page }}
+            Previous
+          </button>
+
+          <button
+            class="btn btn__secondary"
+            type="button"
+            (click)="onPageChange(currentPage + 1)"
+            [disabled]="currentPage === getPageArray().length"
+          >
+            Next
           </button>
         </div>
       </div>
